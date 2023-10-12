@@ -1,0 +1,190 @@
+body {
+    font-family: 'Poppins', sans-serif; /* Aplica Poppins a todo el cuerpo del documento */
+    background-color: #000;
+}
+
+.body-bg {
+    background-color: #e7eaf2;
+    padding: 80px;
+    color: #000
+}
+
+
+/* Si es necesario, puedes especificar otros elementos de Bootstrap específicos, por ejemplo: */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Aplica Poppins a los encabezados */
+}
+/* Menu navegacion */
+.nav-color {
+    background-color: white;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #000; 
+}
+
+/* Estilo para la sección de héroe */
+.hero-section {
+    position: relative;
+    background-image: url('../img/Hero-1.jpg'); /* La ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    height: 600px; /* Ajusta la altura según sea necesario */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-section h1 {
+    font-weight: 100; /* Poppins Light */
+    font-size: 8rem; /* Ajusta el tamaño según sea necesario */
+    color: #000;
+    margin-bottom: 0px; /* Ajusta el margen inferior según sea necesario */
+}
+
+.hero-section p {
+    font-weight: 100; /* Poppins Light */
+    font-size: 3rem; /* Ajusta el tamaño según sea necesario */
+    color: #000;
+    margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+}
+
+/* Estilo para el botón personalizado con color de fondo #ef3054 */
+.custom-btn {
+    background-color: #ef3054;
+    color: #fff; /* Color del texto del botón */
+    border: none;
+    border-radius: 3px;
+    text-decoration: none; /* Quitar subrayado del texto */
+    padding: 10px 20px; /* Ajustar el relleno para agregar margen a los lados */
+    display: inline-block; /* Para que el margen lateral funcione correctamente */
+    margin: 10px; /* Ajustar el margen según sea necesario */
+}
+
+.custom-btn:hover {
+    background-color: #F14161;
+}
+
+.custom-btn-2 {
+    background-color: #ef3054;
+    color: #fff; /* Color del texto del botón */
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none; /* Quitar subrayado del texto */
+    padding: 10px 20px; /* Ajustar el relleno para agregar margen a los lados */
+    display: inline-block; /* Para que el margen lateral funcione correctamente */
+    margin: 10px; /* Ajustar el margen según sea necesario */
+}
+
+.custom-btn-2:hover {
+    background-color: #F14161;
+}
+
+/* Backgrounds para las targetas */
+.custom-card {
+    text-align: center;
+}
+
+.card-1 { 
+    background-color: #adc3b0; 
+    border-radius: 6px;}
+.card-2 { 
+    background-color: #ffba08; 
+    border-radius: 6px;}
+.card-3 { 
+    background-color: #fab482; 
+    border-radius: 6px;}
+.card-4 { 
+    background-color: #c398b7; 
+    border-radius: 6px;}
+.card-5 { 
+    background-color: #ffe66d; 
+    border-radius: 6px;}
+.card-6 { 
+    background-color: #d8dc6a; 
+    border-radius: 6px;}
+
+.card {
+    position: relative;
+}
+
+.btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+}
+
+/* Estilo para el modal */
+.modal-content {
+    background-color: #a0abcc; /* Color de fondo del modal */
+}
+
+.modal-header {
+    background-color: #a0abcc; /* Color de fondo del encabezado del modal */
+    color: #fff; /* Color del texto del encabezado del modal */
+}
+
+.modal-title {
+    font-size: 1.5rem; /* Tamaño del texto del título del modal */
+}
+
+.modal-body {
+    padding: 20px; /* Relleno del cuerpo del modal */
+    background-color: #a0abcc;
+}
+
+.modal-footer {
+    background-color: #f8f9fa; /* Color de fondo del pie del modal */
+}
+
+/* Estilo para los campos del formulario dentro del modal */
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
+    margin-bottom: 15px; /* Espaciado entre los campos del formulario */
+    background-color: #fff;
+    border: none;
+    border-radius: 3px;
+    color: #000;
+    
+}
+
+/* Estilo para el botón de enviar en el formulario */
+.modal-body button.btn-primary {
+    background-color: #ef3054; /* Color de fondo del botón */
+    border: none; /* Sin borde */
+}
+
+.modal-body button.btn-primary:hover {
+    background-color: #F14161; /* Cambio de color al pasar el ratón sobre el botón */
+}
+
+/* Modificar estilos de los campos del formulario dentro del modal */
+.modal-body input:focus,
+.modal-body select:focus,
+.modal-body textarea:focus {
+    border-color: #F14161; /* Cambiar el color del borde al hacer clic */
+    box-shadow: 0 0 5px rgba(239, 48, 84, 0.5); /* Agregar una sombra al hacer clic */
+    background-color: #464f69;
+    color:#fff;
+}
+
+
+
+
+/* Estilos del footer */
+.footer {
+    background-color: #ededea;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.footer p {
+    color: #000;
+}
