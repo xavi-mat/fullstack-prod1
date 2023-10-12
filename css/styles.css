@@ -142,6 +142,11 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #f8f9fa; /* Color de fondo del pie del modal */
 }
 
+.modal-header .btn-close {
+    margin-top: 30px; /* Ajusta el valor según tus preferencias */
+    margin-right: 30px; /* Ajusta el valor según tus preferencias */
+}
+
 /* Estilo para los campos del formulario dentro del modal */
 .modal-body input,
 .modal-body select,
