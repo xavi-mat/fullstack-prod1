@@ -169,6 +169,20 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #F14161; /* Cambio de color al pasar el ratón sobre el botón */
 }
 
+.container-asignaturas {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 200px; /* Ajusta la altura según sea necesario */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
 /* Modificar estilos de los campos del formulario dentro del modal */
 .modal-body input:focus,
 .modal-body select:focus,
@@ -192,4 +206,75 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer p {
     color: #000;
+}
+
+/* Estilos Pagina Detalle */
+
+.container-asignaturas-dg {
+    padding: 0px;
+}
+
+
+.container-asignaturas-dg p {
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.container-asignaturas-dg h3 {
+    font-size: 28px;
+    font-weight: 200;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+
+}
+
+.custom-btn-dg {
+    width: 100%;
+}
+
+#empezadas-column {
+    background-color: #c398b7;
+    border-radius: 6px;
+}
+
+#aprobadas-column {
+    background-color: #adc3b0;
+    border-radius: 6px;
+}
+
+#suspendidas-column {
+    background-color: #d8dc6a;
+    border-radius: 6px;
+}
+
+.custom-card-dg {
+    padding: 12px;
+    margin: 10px;
+}
+
+.card-dragging {
+    opacity: 0.5; /* Hace que la tarjeta sea semi-transparente mientras se arrastra */
+    border: 2px dashed #333; /* Puede ayudar a visualizar el área de destino */
+}
+
+.custom-btn-card-dg {
+    border-radius: 3px;
+    box-shadow: none;
+    border: none;
+    background-color: #ef3054;
+    font-size: 14px;
+    padding: 4px;
+    width: 80%;
+}
+
+.custom-btn-card2-dg {
+    margin-top: 10px;
+    border-radius: 3px;
+    box-shadow: none;
+    border: none;
+    background-color: #464f69;
+    font-size: 14px;
+    padding: 4px;
+    width: 80%;
 }
