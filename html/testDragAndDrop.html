@@ -4,19 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <!-- Interact.js -->
+     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <div class="body-bg">
-        <div class="section">
-            <p class="parrafo" draggable="true" id="parrafo-1">P1</p>
-            <p class="parrafo" draggable="true" id="parrafo-2">P2</p>    
-        </div>
-        <div class="section">
-            <p class="parrafo" draggable="true" id="parrafo-3">P3</p>
-            <p class="parrafo" draggable="true" id="parrafo-4">P4</p>
-        </div>
-    </div> 
+        <div class="body-bg draggable-container">
+            <div class="section" id="empezadas-column">
+                <h3>Empezadas</h3>
+                <button class="custom-btn-dg">+ ASIGNATURA</button>
+                <p class="parrafo" draggable="true" id="parrafo-1">P1</p>
+                <p class="parrafo" draggable="true" id="parrafo-2">P2</p>    
+            </div>
+            <div class="section" id="aprobadas-column">
+                <h3>Aprobadas</h3>
+                <p class="parrafo" draggable="true" id="parrafo-3">P3</p>
+                <p class="parrafo" draggable="true" id="parrafo-4">P4</p>
+            </div>
+            <div class="section" id="suspendidas-column">
+                <h3>Suspendidas</h3>
+                <p class="parrafo" draggable="true" id="parrafo-5">P5</p>
+                <p class="parrafo" draggable="true" id="parrafo-6">P6</p>
+            </div>
+        </div> 
+    
 </body>
 <script src="../js/draggable.js"></script>
 </html>

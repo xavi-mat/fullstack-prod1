@@ -1,20 +1,33 @@
-function allowDrop(event) {
-    event.preventDefault();
-}
+console.log("Hola Mundo")
 
-function drag(event) {
-    event.dataTransfer.setData("text", event.target.id);
-}
+const parrafos = document.querySelectorAll(".parrafo")
+const section = document.querySelectorAll(".section")
 
-function drop(event, columnName) {
-    event.preventDefault();
-    var data = event.dataTransfer.getData("text");
-    var draggedElement = document.getElementById(data);
+parrafos.forEach(parrafo => {
+    parrafo.addEventListener("dragstart", evento => {
+        console.log("Inicio de arrastre")
+        parrafo.classList.add("dragging")
+        event.dataTransfer.setData("id", parrafo.id)
+    })
 
-    // Asegurarse de que estamos soltando dentro de una columna
-    var column = event.target.closest('.column');
-    if (column) {
-        // Mover la tarjeta a la columna correspondiente
-        column.appendChild(draggedElement);
-    }
-}
+    parrafo.addEventListener("dragend", () => {
+        console.log("Fin de arrastre")
+        parrafo.classList.remove("dragging")    
+    })
+})
+
+section.forEach(section => {
+    section.addEventListener("dragover", event => {
+    event.preventDefault()    
+    console.log("Drag Over")  
+    })
+
+    section.addEventListener("drop", event => {
+        console.log("Drop")
+        const id_parrafo = event.dataTransfer.getData("id")
+        console.log("El parrafo es", id_parrafo )
+        const parrafo = document.getElementById(id_parrafo)
+        section.appendChild(parrafo)
+    })
+
+})

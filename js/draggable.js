@@ -7,7 +7,7 @@ parrafos.forEach(parrafo => {
     parrafo.addEventListener("dragstart", evento => {
         console.log("Inicio de arrastre")
         parrafo.classList.add("dragging")
-        event.dataTransfer.setData("id", parrafo.id)
+        evento.dataTransfer.setData("id", parrafo.id)  // Cambiado de event a evento
     })
 
     parrafo.addEventListener("dragend", () => {
@@ -18,8 +18,8 @@ parrafos.forEach(parrafo => {
 
 section.forEach(section => {
     section.addEventListener("dragover", event => {
-    event.preventDefault()    
-    console.log("Drag Over")  
+        event.preventDefault()    
+        console.log("Drag Over")  
     })
 
     section.addEventListener("drop", event => {
@@ -29,5 +29,4 @@ section.forEach(section => {
         const parrafo = document.getElementById(id_parrafo)
         section.appendChild(parrafo)
     })
-
 })

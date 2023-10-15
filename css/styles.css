@@ -1,19 +1,20 @@
 body {
     font-family: 'Poppins', sans-serif; /* Aplica Poppins a todo el cuerpo del documento */
-    background-color: #000;
+    background-color: #e7eaf2;
 }
 
-.body-bg {
+.body-bg .body-hero {
     background-color: #e7eaf2;
     padding: 80px;
-    color: #000
+    color: #000;
+    margin-bottom: 48px;
+    
 }
 
-
-/* Si es necesario, puedes especificar otros elementos de Bootstrap específicos, por ejemplo: */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif; /* Aplica Poppins a los encabezados */
+    font-family: 'Poppins', sans-serif; /* Aplica tipografia Poppins a los encabezados */
 }
+
 /* Menu navegacion */
 .nav-color {
     background-color: white;
@@ -21,6 +22,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-light .navbar-nav .nav-link {
     color: #000; 
+}
+
+.navbar-brand {
+    margin-left: 24px;
 }
 
 /* Estilo para la sección de héroe */
@@ -199,9 +204,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Estilos del footer */
 .footer {
     background-color: #ededea;
-    padding: 20px 0;
+    padding: 20px;
     text-align: center;
     border-radius: 3px;
+    margin-top: 60px;
 }
 
 .footer p {
@@ -231,6 +237,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .custom-btn-dg {
     width: 100%;
+    border: none;
+    padding: 12px;
+    background-color: transparent;
 }
 
 #empezadas-column {
@@ -238,14 +247,38 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 6px;
 }
 
+#empezadas-column .custom-btn-dg{
+    background-color: #9A5B88;
+}
+
+#empezadas-column .custom-btn-dg:hover{
+    background-color: #B47EA4;
+}
+
 #aprobadas-column {
     background-color: #adc3b0;
     border-radius: 6px;
 }
 
+#aprobadas-column .custom-btn-dg{
+    background-color: #688D6D;
+}
+
+#aprobadas-column .custom-btn-dg:hover{
+    background-color: #7EA082;
+}
+
 #suspendidas-column {
     background-color: #d8dc6a;
     border-radius: 6px;
+}
+
+#suspendidas-column .custom-btn-dg{
+    background-color: #A1A527;
+}
+
+#suspendidas-column .custom-btn-dg:hover{
+    background-color: #CBD039;
 }
 
 .custom-card-dg {
@@ -268,6 +301,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 80%;
 }
 
+.custom-btn-card-dg :hover {
+    background-color: #fff;
+}
+
 .custom-btn-card2-dg {
     margin-top: 10px;
     border-radius: 3px;
@@ -279,14 +316,47 @@ h1, h2, h3, h4, h5, h6 {
     width: 80%;
 }
 
-.section {
-    background-color: #adc3b0;
-    padding: 1rem;
-    margin: 1rem;
-}
-
 .parrafo {
     background-color: #fff;
     padding: 1rem;
 
+}
+/* ======= DRAGABBLE ======*/
+.body-bg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Espacio entre las columnas */
+}
+
+.draggable-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.section {
+    background-color: #e7eaf2;
+    padding-top: 24px;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.draggable-container {
+    text-align: center;
+    font-weight: 200;
+    margin: auto; /* Esto centrará el contenedor horizontalmente */
+    max-width: 1400px; /* Ajusta el valor según tus necesidades */
+
+}
+
+.card {
+    margin: 20px;
+
+}
+
+.parrafo {
+    cursor: grab;
+}
+
+.dragging {
+    opacity: 0.5;
 }
