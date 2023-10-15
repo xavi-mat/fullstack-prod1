@@ -278,3 +278,15 @@ h1, h2, h3, h4, h5, h6 {
     padding: 4px;
     width: 80%;
 }
+
+.section {
+    background-color: #adc3b0;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.parrafo {
+    background-color: #fff;
+    padding: 1rem;
+
+}
