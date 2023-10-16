@@ -52,13 +52,53 @@
     </nav>
 
     <div id="dashboard">
-        <div id="dashboardCards"></div>
-        <div id="dashboardNew">
+        <div class="body-bg">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container-asignaturas">
+                    <h1 class="display-4 text-center">_Semestres</h1>
+                    <p class="lead text-center">Organiza tu <span style="font-weight: bold;">curso</span></p>
+                    <button id="dashboardNewBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemester">+ SEMESTRE</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="semestersList" class="d-flex flex-wrap">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="ctitle">Semestre 1</h5>
+                    <p class="card-text">Contenido de la Semestre 1.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class=" ctitle">Semestre 1</h5>
+                    <p class="card-text">Contenido de la Semestre 1.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class=" ctitle">Semestre 1</h5>
+                    <p class="card-text">Contenido de la Semestre 1.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class=" ctitle">Semestre 1</h5>
+                    <p class="card-text">Contenido de la Semestre 1.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class=" ctitle">Semestre 1</h5>
+                    <p class="card-text">Contenido de la Semestre 1.</p>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="dashboardNew">
             <button id="dashboardNewBtn" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#newSemester">Nuevo
                 semestre</button>
-        </div>
-        <div id="divtest">un poco de texto</div>
+        </div> -->
     </div>
 
     <div id="semester" class="d-none">SEMESTER</div>
@@ -70,6 +110,7 @@
         </div>
     </footer>
 
+    <!-- Modals -->
     <div id="newSemester" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-fullscreen-sm-down">
             <div class="modal-content">
@@ -160,6 +201,32 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="confirmDeleteSem">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Eliminar semestre</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              Estás a punto de eliminar el semestre <span id="semNameDelete" class="bold"></span> y toda su información asociada.
+              Esta acción no se puede deshacer.
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" onclick="deleteSemConfirmed()">ELIMINAR</button>
+              <button type="button" class="btn" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
 </body>
 
