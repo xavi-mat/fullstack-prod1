@@ -10,6 +10,7 @@ const semestersList = document.getElementById('semestersList');
 const semesterPage = document.getElementById('semesterPage');
 const semSlogan = document.getElementById('semSlogan');
 const newSemesterForm = new bootstrap.Modal('#newSemesterForm');
+const newSubjectForm = new bootstrap.Modal('#newSubjectForm');
 const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
 const empezadasColumn = document.getElementById('empezadas-column');
 const empezadasList = document.getElementById('empezadasList');
@@ -233,8 +234,11 @@ async function handleNewSubjectForm(ev, form) {
     ev.preventDefault();
 
     const subj = {
-        name: form.subjName.value,
-        descrip: form.subjDescrip.value,
+        name: form.subjectName.value,
+        descrip: form.subjectDescrip.value,
+        difficulty: form.subjectDifficulty.value,
+        grade: form.subjectGrade.value,
+        like: form.subjectLike.value,
         semId: form.subjSemId.value,
         status: PENDIENTE,
     };

@@ -71,7 +71,8 @@
             <div class="container-asignaturas">
                 <h1 id="pageTitle" class="display-4 text-center">_Semestres</h1>
                 <p class="lead text-center">Organiza tu <span id="pageTopic" style="font-weight: bold;">curso</span></p>
-                <p id="semSlogan" class="lead text-center d-none">Lo mejor sería que tus asignaturas no llegaran a la derecha del todo,
+                <p id="semSlogan" class="lead text-center d-none">Lo mejor sería que tus asignaturas no llegaran a la
+                    derecha del todo,
                     pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</p>
                 <!-- Botones para abrir el modal y ejecutar la función agregarTarjeta() -->
                 <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterForm">+
@@ -222,7 +223,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form class="was-validated" onsubmit="return handleNewSubjectForm(event, this)">
-                    <input type="hidden" name="semId">
+                    <input type="hidden" name="subjSemId">
                     <div class="modal-body">
                         <div class="input-group mb-3">
                             <div class="form-floating">
@@ -236,6 +237,23 @@
                             <textarea class="form-control" id="subjectDescrip" name="subjectDescrip"
                                 placeholder="Aquí la descripción"></textarea>
                             <label for="subjectDescrip">Descripción</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input id="subjectDifficulty" name="subjectDifficulty" type="range" min="1" max="10"
+                                value="5">
+                            <label for="subjectDifficulty">Dificultad</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" name="subjectGrade" id="subjectGrade">
+                                <label for="subjectGrade">Nota</label>
+                            </div>
+                            <div class="form-floating">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" name="subjectLike" id="subjectLike">
+                                    <label for="subjectLike">Me gusta</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
