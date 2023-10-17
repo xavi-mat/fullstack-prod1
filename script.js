@@ -8,26 +8,42 @@ const newSemBtn = document.getElementById('newSemBtn');
 const newSubjectBtn = document.getElementById('newSubjectBtn');
 const semestersList = document.getElementById('semestersList');
 const semesterPage = document.getElementById('semesterPage');
+const semSlogan = document.getElementById('semSlogan');
 const newSemesterForm = new bootstrap.Modal('#newSemesterForm');
 const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
+const empezadasColumn = document.getElementById('empezadas-column');
+const empezadasList = document.getElementById('empezadasList');
+const aprobadasColumn = document.getElementById('aprobadas-column');
+const aprobadasList = document.getElementById('aprobadasList');
+const suspendidasColumn = document.getElementById('suspendidas-column');
+const suspendidasList = document.getElementById('suspendidasList');
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
-
+const EMPEZADA = 1;
+const APROBADA = 2;
+const SUSPENDIDA = 3;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Variables
 let data;
 
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // UTILS
-function getSemesterById(id) {
-    return data.semesters.find(sem => sem.id == id);
-}
 function showMe(...elems) { elems.forEach(e => e.classList.remove('d-none')); }
 function hideMe(...elems) { elems.forEach(e => e.classList.add('d-none')); }
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // DATA
 // Funciones que simulan acceder a una base de datos para leer,escribir, editar
@@ -61,6 +77,32 @@ async function getData() {
     return data;
 }
 
+async function getSemesterById(id) {
+    return data.semesters.find(sem => sem.id === id);
+}
+
+async function getSubjectById(id) {
+    return data.semesters
+        .map(sem => sem.subjects)
+        .flat()
+        .find(subj => subj.id === id);
+}
+
+async function updateSubjectStatus(id, status) {
+
+    // Cast to numbers
+    id = Number(id);
+    status = Number(status);
+
+    const subj = await getSubjectById(id);
+    if (subj) {
+        subj.status = status;
+
+    } else {
+        throw new Error(`Subject ${id} not found`);
+    }
+}
+
 async function deleteData(info) {
     if (info.semId) {
         // Delete semester by Id
@@ -77,21 +119,22 @@ async function deleteData(info) {
     }
 }
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // LOGIC
-function deleteSem(id) {
+async function deleteSem(id) {
 
-    const sem = getSemesterById(id);
+    const sem = await getSemesterById(id);
 
     if (sem) {
         const semName = document.getElementById("semNameDelete");
         semName.innerHTML = sem.name;
         semName.dataset.id = id;
         confirmDeleteSem.show();
-        // document.getElementById('confirmDeleteSemBtn').onclick = () => {
-        //     confirmDeleteSem.hide();
-        //     console.log('Deleting sem', id);
-        // };
     }
 }
 
@@ -103,29 +146,60 @@ async function deleteSemConfirmed() {
     refreshSemesters(data.semesters);
 }
 
+function editSubject(id) {
+    console.log("TODO: Edit subject " + id);
+}
+async function deleteSubject(id) {
+    await deleteData({ subjId: id });
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // TEMPLATES
-function createSemCard(data) {
-
-    let descrip = data.descrip;
+function createSemCard(sem) {
+    let descrip = sem.descrip;
     // Trim description to 30 chars if needed
-    if (descrip.length > 30) { descrip = data.descript.slice(0, 27) + '...'; }
+    if (descrip.length > 30) { descrip = sem.descript.slice(0, 27) + '...'; }
 
-    return `<div class="card mb-3">
-    <button class="btn-close" onclick="deleteSem(${data.id})"></button>
+    return `<div id="semester${sem.id}" class="card mb-3" data-id="${sem.id}">
+    <button class="btn-close" onclick="deleteSem(${sem.id})"></button>
     <h5 class="card-header">
-    ${data.name}
+    ${sem.name}
     </h5>
-    <div class="card-body" data-id="${data.id}">
+    <div class="card-body">
         <p class="card-text">${descrip}</p>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary" onclick="openSem(${data.id})">Ver</button>
+        <button class="btn btn-primary" onclick="openSem(${sem.id})">Ver</button>
+    </div>
+</div>`;
+}
+
+function createSubjectCard(subj) {
+    let descrip = subj.descrip;
+    // Trim description to 30 chars if needed
+    if (descrip.length > 30) { descrip = subj.descript.slice(0, 27) + '...'; }
+
+    return `<div class="card parrafo" draggable="true" id="subject${subj.id}" data-id="${subj.id}">
+    <div class="card-body">
+        <button class="btn-close" onclick="deleteSubject(${subj.id})"></button>
+        <h5 class="card-title">${subj.name}</button></h5>
+        <p class="card-text">${descrip}</p>
+        <button class="custom-btn-card-dg" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="editSubject(${subj.id})">EDITAR</button>
+        <!-- button class="btn btn-primary" onclick="editSubject(${subj.id})"><i class="bi bi-pencil-square"></i></button -->
+        <!-- button class="btn btn-danger"><i class="bi bi-x-circle"></i></button -->
+        <!-- button class="custom-btn-card2-dg" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="agregarTarjeta()">BORRAR</button -->
     </div>
 </div>`;
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers
 async function handleNewSemForm(ev, form) {
@@ -152,12 +226,69 @@ async function handleNewSemForm(ev, form) {
     return false;
 }
 
+function dragover(ev) {
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = "move";
+}
+function dragenter(ev) {
+    ev.preventDefault();
+    // Remove dragover class from all sections
+    document.querySelectorAll('.section').forEach(col => {
+        col.classList.remove('dragover');
+    });
+    this.classList.add('dragover');
+}
+function dragleave(ev) {
+    ev.preventDefault();
+    // this.classList.remove('dragover');
+}
+async function dragdrop(ev) {
+    ev.preventDefault();
+    const column = ev.currentTarget;
+    this.classList.remove('dragover');
+    const data = ev.dataTransfer.getData('text/plain');
+    const card = document.getElementById(data);
+    const subjectId = card.dataset.id;
+    const status = column.dataset.status;
+    console.log({ subjectId, status });
+    await updateSubjectStatus(subjectId, status);
+    column.querySelector("div").appendChild(card);
+}
+function dragstart(ev) {
+    ev.dataTransfer.setData('text/plain', this.id);
+}
+function dragend(ev) {
+    // Remove dragover class from all sections
+    document.querySelectorAll('.section').forEach(col => {
+        col.classList.remove('dragover');
+    });
+}
+
+function applyListeners() {
+    // Drag&drop listeners
+    empezadasColumn.addEventListener('dragover', dragover);
+    empezadasColumn.addEventListener('dragenter', dragenter);
+    empezadasColumn.addEventListener('dragleave', dragleave);
+    empezadasColumn.addEventListener('drop', dragdrop);
+    aprobadasColumn.addEventListener('dragover', dragover);
+    aprobadasColumn.addEventListener('dragenter', dragenter);
+    aprobadasColumn.addEventListener('dragleave', dragleave);
+    aprobadasColumn.addEventListener('drop', dragdrop);
+    suspendidasColumn.addEventListener('dragover', dragover);
+    suspendidasColumn.addEventListener('dragenter', dragenter);
+    suspendidasColumn.addEventListener('dragleave', dragleave);
+    suspendidasColumn.addEventListener('drop', dragdrop);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // UI
 function goSemsList() {
     pageTitle.innerHTML = '_Semestres';
     pageTopic.innerHTML = 'curso';
-    hideMe(semesterPage, newSubjectBtn);
+    hideMe(semesterPage, semSlogan, newSubjectBtn);
     showMe(semestersList, newSemBtn);
 }
 function refreshSemesters(semesters) {
@@ -169,22 +300,55 @@ function refreshSemesters(semesters) {
     });
 }
 
-function openSem(id) {
+async function openSem(id) {
 
     pageTitle.innerHTML = '_Asignaturas';
     pageTopic.innerHTML = 'semestre';
 
     hideMe(semestersList, newSemBtn);
     console.log('Opening sem', id);
-    const sem = getSemesterById(id);
+    const sem = await getSemesterById(id);
 
-    showMe(semesterPage, newSubjectBtn);
+    // Clear lists
+    empezadasList.innerHTML = '';
+    aprobadasList.innerHTML = '';
+    suspendidasList.innerHTML = '';
+
+    if (sem) {
+        // Fill in semester subjects by status
+        sem.subjects.forEach(subj => {
+            const subjCard = createSubjectCard(subj);
+            switch (subj.status) {
+                case EMPEZADA:
+                    empezadasList.innerHTML += subjCard;
+                    break;
+                case APROBADA:
+                    aprobadasList.innerHTML += subjCard;
+                    break;
+                case SUSPENDIDA:
+                    suspendidasList.innerHTML += subjCard;
+                    break;
+            }
+        });
+
+        // Add dragstart listeners to subject cards
+        document.querySelectorAll('.parrafo').forEach(card => {
+            card.addEventListener('dragstart', dragstart);
+            card.addEventListener('dragend', dragend);
+        });
+    }
+
+    showMe(semesterPage, semSlogan, newSubjectBtn);
 }
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 async function init() {
+    applyListeners();
     data = await getData();
     refreshSemesters(data.semesters);
 }

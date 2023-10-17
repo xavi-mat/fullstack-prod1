@@ -364,3 +364,7 @@ h1, h2, h3, h4, h5, h6 {
 .bold {
     font-weight: bold;
 }
+.dragover {
+    /*  Make it glow with light */
+    box-shadow: 0 0 10px 0 #ff0000;
+}
