@@ -2,8 +2,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // GLOBALS
 // Elements
+const newSemesterForm = new bootstrap.Modal('#newSemesterForm');
 const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
@@ -135,7 +135,10 @@ async function handleNewSemForm(ev, form) {
         subjects: [],
     };
 
+    newSemesterForm.hide();
+    // TODO: Show spinner
     await createData({ sem });
+    // TODO: Hide spinner
     refreshSemesters(data.semesters);
 
     return false;
