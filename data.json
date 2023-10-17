@@ -15,37 +15,55 @@
                     "id": 1,
                     "name": "CS 101",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 2,
                     "name": "CS 102",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 3,
                     "name": "CS 103",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 4,
                     "name": "CS 104",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 5,
                     "name": "CS 105",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 6,
                     "name": "CS 106",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 }
             ]
         },
@@ -64,37 +82,55 @@
                     "id": 7,
                     "name": "CS 201",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 8,
                     "name": "CS 202",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 9,
                     "name": "CS 203",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 10,
                     "name": "CS 204",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 11,
                     "name": "CS 205",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 12,
                     "name": "CS 206",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 }
             ]
         },
@@ -113,37 +149,55 @@
                     "id": 13,
                     "name": "CS 301",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 14,
                     "name": "CS 302",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 15,
                     "name": "CS 303",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 16,
                     "name": "CS 304",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 17,
                     "name": "CS 305",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 },
                 {
                     "id": 18,
                     "name": "CS 306",
                     "descrip": "Intro to Computer Science",
-                    "status": 1
+                    "status": 1,
+                    "difficulty": 1,
+                    "subjField1": 0,
+                    "subjField2": 0
                 }
             ]
         }

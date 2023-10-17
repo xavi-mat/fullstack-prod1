@@ -20,6 +20,7 @@ const suspendidasList = document.getElementById('suspendidasList');
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
+const PENDIENTE = 0;
 const EMPEZADA = 1;
 const APROBADA = 2;
 const SUSPENDIDA = 3;
@@ -78,10 +79,12 @@ async function getData() {
 }
 
 async function getSemesterById(id) {
+    id = Number(id);
     return data.semesters.find(sem => sem.id === id);
 }
 
 async function getSubjectById(id) {
+    id = Number(id);
     return data.semesters
         .map(sem => sem.subjects)
         .flat()
@@ -151,7 +154,9 @@ function editSubject(id) {
 }
 async function deleteSubject(id) {
     await deleteData({ subjId: id });
-
+    const semId = semesterPage.dataset.id;
+    const sem = await getSemesterById(semId);
+    refreshSubjects(sem);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -218,11 +223,25 @@ async function handleNewSemForm(ev, form) {
     };
 
     newSemesterForm.hide();
-    // TODO: Show spinner
     await createData({ sem });
-    // TODO: Hide spinner
     refreshSemesters(data.semesters);
 
+    return false;
+}
+
+async function handleNewSubjectForm(ev, form) {
+    ev.preventDefault();
+
+    const subj = {
+        name: form.subjName.value,
+        descrip: form.subjDescrip.value,
+        semId: form.subjSemId.value,
+        status: PENDIENTE,
+    };
+
+    newSubjectForm.hide();
+    await createData({ subj });
+    // TODO: refresh subjects
     return false;
 }
 
@@ -291,6 +310,7 @@ function goSemsList() {
     hideMe(semesterPage, semSlogan, newSubjectBtn);
     showMe(semestersList, newSemBtn);
 }
+
 function refreshSemesters(semesters) {
 
     semestersList.innerHTML = '';
@@ -302,13 +322,18 @@ function refreshSemesters(semesters) {
 
 async function openSem(id) {
 
+    console.log('Opening sem', id);
+
     pageTitle.innerHTML = '_Asignaturas';
     pageTopic.innerHTML = 'semestre';
-
     hideMe(semestersList, newSemBtn);
-    console.log('Opening sem', id);
     const sem = await getSemesterById(id);
+    refreshSubjects(sem);
+    semesterPage.dataset.id = id;
+    showMe(semesterPage, semSlogan, newSubjectBtn);
+}
 
+function refreshSubjects(sem) {
     // Clear lists
     empezadasList.innerHTML = '';
     aprobadasList.innerHTML = '';
@@ -337,11 +362,7 @@ async function openSem(id) {
             card.addEventListener('dragend', dragend);
         });
     }
-
-    showMe(semesterPage, semSlogan, newSubjectBtn);
 }
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////

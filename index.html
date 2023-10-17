@@ -98,19 +98,19 @@
         <div class="body-bg draggable-container">
             <div class="section dctilte" id="empezadas-column" data-status="1">
                 <h3>Empezadas</h3>
-                <!-- <button class="custom-btn-dg">+ ASIGNATURA</button> -->
+                <button class="custom-btn-dg">+ ASIGNATURA</button>
                 <div id="empezadasList"></div>
             </div>
 
             <div class="section dctilte" id="aprobadas-column" data-status="2">
                 <h3>Aprobadas</h3>
-                <!-- <button class="custom-btn-dg">+ ASIGNATURA</button> -->
+                <button class="custom-btn-dg">+ ASIGNATURA</button>
                 <div id="aprobadasList"></div>
             </div>
 
             <div class="section dctilte" id="suspendidas-column" data-status="3">
                 <h3>Suspendidas</h3>
-                <!-- <button class="custom-btn-dg">+ ASIGNATURA</button> -->
+                <button class="custom-btn-dg">+ ASIGNATURA</button>
                 <div id="suspendidasList"></div>
             </div>
         </div>
@@ -222,6 +222,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form class="was-validated" onsubmit="return handleNewSubjectForm(event, this)">
+                    <input type="hidden" name="semId">
                     <div class="modal-body">
                         <div class="input-group mb-3">
                             <div class="form-floating">
