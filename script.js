@@ -2,6 +2,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 // GLOBALS
 // Elements
+const pageTitle = document.getElementById('pageTitle');
+const pageTopic = document.getElementById('pageTopic');
+const newSemBtn = document.getElementById('newSemBtn');
+const newSubjectBtn = document.getElementById('newSubjectBtn');
+const semestersList = document.getElementById('semestersList');
+const semesterPage = document.getElementById('semesterPage');
 const newSemesterForm = new bootstrap.Modal('#newSemesterForm');
 const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
 
@@ -19,6 +25,8 @@ let data;
 function getSemesterById(id) {
     return data.semesters.find(sem => sem.id == id);
 }
+function showMe(...elems) { elems.forEach(e => e.classList.remove('d-none')); }
+function hideMe(...elems) { elems.forEach(e => e.classList.add('d-none')); }
 
 ////////////////////////////////////////////////////////////////////////////////
 // DATA
@@ -146,15 +154,32 @@ async function handleNewSemForm(ev, form) {
 
 ////////////////////////////////////////////////////////////////////////////////
 // UI
+function goSemsList() {
+    pageTitle.innerHTML = '_Semestres';
+    pageTopic.innerHTML = 'curso';
+    hideMe(semesterPage, newSubjectBtn);
+    showMe(semestersList, newSemBtn);
+}
 function refreshSemesters(semesters) {
-    const sems = document.getElementById('semestersList');
-    sems.innerHTML = '';
+
+    semestersList.innerHTML = '';
 
     semesters.forEach(sem => {
-        sems.innerHTML += createSemCard(sem);
+        semestersList.innerHTML += createSemCard(sem);
     });
 }
 
+function openSem(id) {
+
+    pageTitle.innerHTML = '_Asignaturas';
+    pageTopic.innerHTML = 'semestre';
+
+    hideMe(semestersList, newSemBtn);
+    console.log('Opening sem', id);
+    const sem = getSemesterById(id);
+
+    showMe(semesterPage, newSubjectBtn);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

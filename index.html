@@ -22,7 +22,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Logo a la izquierda -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#" onclick="goSemsList()">
             <img src="./img/Logo-1.png" width="180" height="26" alt="">
         </a>
 
@@ -51,52 +51,37 @@
         </div>
     </nav>
 
-    <div id="dashboard">
+    <!-- <div id="dashboard">
         <div class="body-bg">
             <div class="jumbotron jumbotron-fluid">
                 <div class="container-asignaturas">
                     <h1 class="display-4 text-center">_Semestres</h1>
                     <p class="lead text-center">Organiza tu <span style="font-weight: bold;">curso</span></p>
-                    <button id="dashboardNewBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterForm">+ SEMESTRE</button>
+                    <button id="das hboardNewBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterForm">+ SEMESTRE</button>
                 </div>
             </div>
         </div>
+    </div> -->
 
-        <div id="semestersList" class="d-flex flex-wrap">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="ctitle">Semestre 1</h5>
-                    <p class="card-text">Contenido de la Semestre 1.</p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class=" ctitle">Semestre 1</h5>
-                    <p class="card-text">Contenido de la Semestre 1.</p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class=" ctitle">Semestre 1</h5>
-                    <p class="card-text">Contenido de la Semestre 1.</p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class=" ctitle">Semestre 1</h5>
-                    <p class="card-text">Contenido de la Semestre 1.</p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class=" ctitle">Semestre 1</h5>
-                    <p class="card-text">Contenido de la Semestre 1.</p>
-                </div>
+    <!-- SubHero section -->
+    <div class="body-hero mt-5 mb-5">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container-asignaturas">
+                <h1 id="pageTitle" class="display-4 text-center">_Semestres</h1>
+                <p class="lead text-center">Organiza tu <span id="pageTopic" style="font-weight: bold;">curso</span></p>
+                    <!-- Botones para abrir el modal y ejecutar la función agregarTarjeta() -->
+                    <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterForm">+ SEMESTRE</button>
+                    <button id="newSubjectBtn" class="custom-btn d-none" data-bs-toggle="modal" data-bs-target="#newSubjectForm">+ ASIGNATURA</button>
+
+
+                <!-- <button class="custom-btn" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="agregarTarjeta()">+ ASIGNATURA</button> -->
             </div>
         </div>
     </div>
 
-    <div id="semester" class="d-none">SEMESTER</div>
+    <div id="semestersList" class="d-flex flex-wrap"></div>
+
+    <div id="semesterPage" class="d-none">SEMESTER</div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -134,7 +119,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="semName" placeholder="Nombre" name="semName"
                                     required>
-                                <label for="email">Nombre</label>
+                                <label for="semName">Nombre</label>
                                 <div class="invalid-feedback">El nombre es necesario.</div>
                             </div>
                             <div class="form-floating">
@@ -184,6 +169,39 @@
                                 <input class="form-check-input" type="checkbox" id="semTutor" name="semTutor" checked>
                                 <label class="form-check-label" for="mySwitch">Tutorizado</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Añadir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="newSubjectForm" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva asignatura</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form class="was-validated" onsubmit="return handleNewSubjectForm(event, this)">
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="subjectName" placeholder="Nombre" name="subjectName"
+                                    required>
+                                <label for="subjectName">Nombre</label>
+                                <div class="invalid-feedback">El nombre es necesario.</div>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="subjectDescrip" name="subjectDescrip"
+                                placeholder="Aquí la descripción"></textarea>
+                            <label for="subjectDescrip">Descripción</label>
                         </div>
                     </div>
                     <div class="modal-footer">
