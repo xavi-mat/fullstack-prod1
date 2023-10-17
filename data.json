@@ -10,7 +10,7 @@
             "color": 0,
             "type": 1,
             "tutorized": true,
-            "courses": [
+            "subjects": [
                 {
                     "id": 1,
                     "name": "CS 101",
@@ -59,7 +59,7 @@
             "color": 1,
             "type": 1,
             "tutorized": true,
-            "courses": [
+            "subjects": [
                 {
                     "id": 7,
                     "name": "CS 201",
@@ -108,7 +108,7 @@
             "color": 0,
             "type": 1,
             "tutorized": true,
-            "courses": [
+            "subjects": [
                 {
                     "id": 13,
                     "name": "CS 301",

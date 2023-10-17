@@ -16,10 +16,36 @@ let data;
 
 ////////////////////////////////////////////////////////////////////////////////
 // UTILS
-function getSemesterById(id) { return data.semesters.find(sem => sem.id == id); }
+function getSemesterById(id) {
+    return data.semesters.find(sem => sem.id == id);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // DATA
+// Funciones que simulan acceder a una base de datos para leer,escribir, editar
+// y borrar datos (CRUD).
+// Cuando estas funciones accedan a una BD real, el resto del programa no
+// necesitará ningún cambio.
+async function createData(info) {
+    // Create semester
+    if (info.sem) {
+        console.log('Creating semester', info.sem);
+
+        // Assign new id to semester, using reduce
+        const id = data.semesters.reduce((max, sem) => {
+            return sem.id > max ? sem.id : max;
+        }, 0) + 1;
+        info.sem.id = id;
+
+        data.semesters.push(info.sem);
+    }
+
+    // Create subject
+    if (info.subj) {
+        // TODO: Create subject
+        console.log('TODO: Creating subject', info.subj);
+    }
+}
 async function getData() {
     // Fake data from data.json
     const dataRaw = await fetch('data.json');
@@ -28,13 +54,19 @@ async function getData() {
 }
 
 async function deleteData(info) {
-
     if (info.semId) {
         // Delete semester by Id
         console.log('Deleting semester', info.semId);
         data.semesters = data.semesters.filter(sem => sem.id != info.semId);
     }
-
+    if (info.subjId) {
+        // Delete subject by Id
+        console.log('Deleting subject', info.subjId);
+        data.semesters.forEach(sem =>
+            sem.subjects = sem.subjects.filter(
+                subj => subj.id != info.subjId)
+        );
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,10 +81,10 @@ function deleteSem(id) {
         semName.dataset.id = id;
         confirmDeleteSem.show();
         // document.getElementById('confirmDeleteSemBtn').onclick = () => {
-            //     confirmDeleteSem.hide();
-            //     console.log('Deleting sem', id);
-            // };
-        }
+        //     confirmDeleteSem.hide();
+        //     console.log('Deleting sem', id);
+        // };
+    }
 }
 
 async function deleteSemConfirmed() {
@@ -88,10 +120,10 @@ function createSemCard(data) {
 
 ////////////////////////////////////////////////////////////////////////////////
 // Handlers
-function handleNewSemForm(ev, form) {
+async function handleNewSemForm(ev, form) {
     ev.preventDefault();
 
-    const data = {
+    const sem = {
         name: form.semName.value,
         year: form.semYear.value,
         start: form.semStart.value,
@@ -99,10 +131,12 @@ function handleNewSemForm(ev, form) {
         descrip: form.semDescrip.value,
         color: form.semColor.value,
         type: form.semType.value,
-        tutor: form.semTutor.value,
+        tutorized: form.semTutor.checked,
+        subjects: [],
     };
 
-    console.log(data);
+    await createData({ sem });
+    refreshSemesters(data.semesters);
 
     return false;
 }
