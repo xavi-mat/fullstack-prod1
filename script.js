@@ -451,7 +451,7 @@ function applyListeners() {
     // suspendidasColumn.addEventListener('dragenter', dragenter);
     // suspendidasColumn.addEventListener('dragleave', dragleave);
     // suspendidasColumn.addEventListener('drop', dragdrop);
-    
+
     zones.forEach(zone => {
         zone.addEventListener('dragover', dragover);
         zone.addEventListener('dragenter', dragenter);
