@@ -21,6 +21,12 @@ const aprobadasColumn = document.getElementById('aprobadas-column');
 const aprobadasList = document.getElementById('aprobadasList');
 const suspendidasColumn = document.getElementById('suspendidas-column');
 const suspendidasList = document.getElementById('suspendidasList');
+// Hidden fields in Subject Form
+const hiddenSubj = {
+    id: document.getElementById('subjId'),
+    status: document.getElementById('subjStatus'),
+    semId: document.getElementById('subjSemId'),
+};
 const zones = [pendientesZone, empezadasColumn, aprobadasColumn,
     suspendidasColumn];
 
@@ -337,6 +343,10 @@ async function handleNewSemForm(ev, form) {
 async function handleNewSubjectForm(ev, form) {
     ev.preventDefault();
 
+    // TODO: Si en el formulario hay una id (en el campo escondido subjId), es
+    // porque se está editando una asignatura. En ese caso, hay que actualizar
+    // la asignatura en la BD en vez de crear una nueva.
+
     const subj = {
         name: form.subjectName.value,
         descrip: form.subjectDescrip.value,
@@ -344,7 +354,7 @@ async function handleNewSubjectForm(ev, form) {
         grade: form.subjectGrade.value,
         like: form.subjectLike.value,
         semId: form.subjSemId.value,
-        status: PENDIENTE,  // TODO: sacar este dato de un input hidden del formulario
+        status:form.subjStatus.value,
     };
 
     newSubjectForm.hide();
@@ -562,7 +572,21 @@ function refreshSubjects(sem) {
     }
 }
 
-
+/**
+ * Muestra el formulario de las asignaturas.
+ * @param {Number} status - Estado de la asignatura que se quiere crear
+ * o editar
+ * @param {Number} id - Id de la asignatura que se quiere editar
+ * (solo si se está editando).
+ */
+function openSubjectForm(status, id=null) {
+    // Set hidden values in form
+    hiddenSubj.status.value = status;
+    hiddenSubj.semId.value = semesterPage.dataset.id;
+    if (id) { hiddenSubj.id.value = id; }
+    else { hiddenSubj.id.value = ''; }
+    newSubjectForm.show();
+}
 
 
 

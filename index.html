@@ -53,18 +53,6 @@
     </div>
   </nav>
 
-  <!-- <div id="dashboard">
-        <div class="body-bg">
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container-asignaturas">
-                    <h1 class="display-4 text-center">_Semestres</h1>
-                    <p class="lead text-center">Organiza tu <span style="font-weight: bold;">curso</span></p>
-                    <button id="das hboardNewBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterForm">+ SEMESTRE</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
   <!-- SubHero -->
   <div class="body-hero mt-5 mb-5">
     <div class="jumbotron jumbotron-fluid">
@@ -74,12 +62,10 @@
         <p id="semSlogan" class="lead text-center d-none">Lo mejor sería que tus asignaturas no llegaran a la
           derecha del todo,
           pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</p>
-        <!-- Botones para abrir el modal y ejecutar la función agregarTarjeta() -->
+        <!-- Botones para abrir los modales de formulario -->
         <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterForm">+
           SEMESTRE</button>
-        <button id="newSubjectBtn" class="custom-btn d-none" data-bs-toggle="modal" data-bs-target="#newSubjectForm">+
-          ASIGNATURA</button>
-        <!-- <button class="custom-btn" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="agregarTarjeta()">+ ASIGNATURA</button> -->
+        <button id="newSubjectBtn" class="custom-btn d-none" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
       </div>
     </div>
   </div>
@@ -87,15 +73,6 @@
   <div id="semestersList" class="d-flex flex-wrap"></div>
 
   <div id="semesterPage" class="d-none">
-    <!-- <div class="body-hero mt-5 mb-5">
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container-asignaturas">
-                    <h1 class="display-4 text-center">Drag and <work style="font-weight: bold;">drop</span></h1>
-                    <p class="lead text-center">Lo mejor sería que tus asignaturas no llegaran a la derecha del todo,
-                        pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</p>
-                </div>
-            </div>
-        </div> -->
     <div id="pendientes-zone" class="zone" data-status="0">
       <h3>Pendientes</h3>
       <div id="pendientesList" class=" d-flex flex-wrap"></div>
@@ -103,19 +80,19 @@
     <div class="body-bg draggable-container">
       <div class="section dctilte" id="empezadas-column" data-status="1">
         <h3>Empezadas</h3>
-        <button class="custom-btn-dg">+ ASIGNATURA</button>
+        <button class="custom-btn-dg" onclick="openSubjectForm(1)">+ ASIGNATURA</button>
         <div id="empezadasList"></div>
       </div>
 
       <div class="section dctilte" id="aprobadas-column" data-status="2">
         <h3>Aprobadas</h3>
-        <button class="custom-btn-dg">+ ASIGNATURA</button>
+        <button class="custom-btn-dg" onclick="openSubjectForm(2)">+ ASIGNATURA</button>
         <div id="aprobadasList"></div>
       </div>
 
       <div class="section dctilte" id="suspendidas-column" data-status="3">
         <h3>Suspendidas</h3>
-        <button class="custom-btn-dg">+ ASIGNATURA</button>
+        <button class="custom-btn-dg" onclick="openSubjectForm(3)">+ ASIGNATURA</button>
         <div id="suspendidasList"></div>
       </div>
     </div>
@@ -223,7 +200,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <form class="was-validated" onsubmit="return handleNewSubjectForm(event, this)">
-          <input type="hidden" name="subjSemId">
+          <input type="hidden" name="subjId" id="subjId">
+          <input type="hidden" name="subjSemId" id="subjSemId">
+          <input type="hidden" name="subjStatus" id="subjStatus">
           <div class="modal-body">
             <div class="input-group mb-3">
               <div class="form-floating">
