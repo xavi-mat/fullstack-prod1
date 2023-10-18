@@ -240,7 +240,7 @@ function createSemCard(sem) {
     // Trim description to 30 chars if needed
     if (descrip.length > 30) { descrip = sem.descript.slice(0, 27) + '...'; }
 
-    return `<div id="semester${sem.id}" class="card mb-3" data-id="${sem.id}">
+    return `<div id="semester${sem.id}" class="card mb-3 semester-card" data-id="${sem.id}">
     <button class="btn-close" onclick="deleteSem(${sem.id})"></button>
     <h5 class="card-header">
     ${sem.name}
