@@ -20,6 +20,8 @@ const aprobadasColumn = document.getElementById('aprobadas-column');
 const aprobadasList = document.getElementById('aprobadasList');
 const suspendidasColumn = document.getElementById('suspendidas-column');
 const suspendidasList = document.getElementById('suspendidasList');
+const zones = [pendientesZone, empezadasColumn, aprobadasColumn,
+    suspendidasColumn];
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
@@ -367,10 +369,8 @@ function dragover(ev) {
  */
 function dragenter(ev) {
     ev.preventDefault();
-    // Remove dragover class from all sections
-    document.querySelectorAll('.section').forEach(col => {
-        col.classList.remove('dragover');
-    });
+    // Remove dragover class from all zones
+    zones.forEach(zone => zone.classList.remove('dragover'));
     this.classList.add('dragover');
 }
 
@@ -422,33 +422,42 @@ function dragstart(ev) {
  * Elimina la clase 'dragover' (que añade un borde rojo) de todas las columnas.
  */
 function dragend(ev) {
-    // Remove dragover class from all sections
-    document.querySelectorAll('.section').forEach(col => {
-        col.classList.remove('dragover');
-    });
+    // Remove dragover class from all zones
+    zones.forEach(zone => zone.classList.remove('dragover'));
 }
 
 /**
- * Aplica los listeners de drag&drop a las columnas y la zona general.
+ * Aplica los listeners de drag&drop a las columnas y la zona de "pendientes",
+ * es decir, a todas las zonas que pueden recibir una asignatura arrastrada.
  */
 function applyListeners() {
     // Drag&drop listeners
-    pendientesZone.addEventListener('dragover', dragover);
-    pendientesZone.addEventListener('dragenter', dragenter);
-    pendientesZone.addEventListener('dragleave', dragleave);
-    pendientesZone.addEventListener('drop', dragdrop);
-    empezadasColumn.addEventListener('dragover', dragover);
-    empezadasColumn.addEventListener('dragenter', dragenter);
-    empezadasColumn.addEventListener('dragleave', dragleave);
-    empezadasColumn.addEventListener('drop', dragdrop);
-    aprobadasColumn.addEventListener('dragover', dragover);
-    aprobadasColumn.addEventListener('dragenter', dragenter);
-    aprobadasColumn.addEventListener('dragleave', dragleave);
-    aprobadasColumn.addEventListener('drop', dragdrop);
-    suspendidasColumn.addEventListener('dragover', dragover);
-    suspendidasColumn.addEventListener('dragenter', dragenter);
-    suspendidasColumn.addEventListener('dragleave', dragleave);
-    suspendidasColumn.addEventListener('drop', dragdrop);
+    // En vez de hacerlo una a una, podemos iterar por el array de zonas con
+    // forEach y aplicar los listeners a cada una de ellas.
+
+    // pendientesZone.addEventListener('dragover', dragover);
+    // pendientesZone.addEventListener('dragenter', dragenter);
+    // pendientesZone.addEventListener('dragleave', dragleave);
+    // pendientesZone.addEventListener('drop', dragdrop);
+    // empezadasColumn.addEventListener('dragover', dragover);
+    // empezadasColumn.addEventListener('dragenter', dragenter);
+    // empezadasColumn.addEventListener('dragleave', dragleave);
+    // empezadasColumn.addEventListener('drop', dragdrop);
+    // aprobadasColumn.addEventListener('dragover', dragover);
+    // aprobadasColumn.addEventListener('dragenter', dragenter);
+    // aprobadasColumn.addEventListener('dragleave', dragleave);
+    // aprobadasColumn.addEventListener('drop', dragdrop);
+    // suspendidasColumn.addEventListener('dragover', dragover);
+    // suspendidasColumn.addEventListener('dragenter', dragenter);
+    // suspendidasColumn.addEventListener('dragleave', dragleave);
+    // suspendidasColumn.addEventListener('drop', dragdrop);
+    
+    zones.forEach(zone => {
+        zone.addEventListener('dragover', dragover);
+        zone.addEventListener('dragenter', dragenter);
+        zone.addEventListener('dragleave', dragleave);
+        zone.addEventListener('drop', dragdrop);
+    });
 }
 
 
