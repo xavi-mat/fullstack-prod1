@@ -13,3 +13,6 @@
 * modal de edición de asignatura
 * modal de edición de semestre
 * Datos de semestre en la página de semestre
+
+## DONE
+* Estilizar zona de asignaturas pendientes

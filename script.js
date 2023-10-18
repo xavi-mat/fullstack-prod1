@@ -14,6 +14,7 @@ const newSemesterForm = new bootstrap.Modal('#newSemesterForm');
 const newSubjectForm = new bootstrap.Modal('#newSubjectForm');
 const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
 const pendientesZone = document.getElementById('pendientes-zone');
+const pendientesList = document.getElementById('pendientesList');
 const empezadasColumn = document.getElementById('empezadas-column');
 const empezadasList = document.getElementById('empezadasList');
 const aprobadasColumn = document.getElementById('aprobadas-column');
@@ -407,6 +408,11 @@ async function dragdrop(ev) {
     const status = column.dataset.status;
     console.log({ subjectId, status });
     await updateSubjectStatus(subjectId, status);
+    // La tarjeta se añade a un div que está dentro de la columna, por eso se
+    // usa querySelector para seleccionar ese div y luego appendChild para
+    // añadir la tarjeta a ese div.
+    const elDivEse = column.querySelector("div");
+    console.log({elDivEse});
     column.querySelector("div").appendChild(card);
 }
 
@@ -523,7 +529,7 @@ async function openSem(id) {
  */
 function refreshSubjects(sem) {
     // Clear lists
-    pendientesZone.innerHTML = '';
+    pendientesList.innerHTML = '';
     empezadasList.innerHTML = '';
     aprobadasList.innerHTML = '';
     suspendidasList.innerHTML = '';
@@ -534,7 +540,7 @@ function refreshSubjects(sem) {
             const subjCard = createSubjectCard(subj);
             switch (subj.status) {
                 case PENDIENTE:
-                    pendientesZone.innerHTML += subjCard;
+                    pendientesList.innerHTML += subjCard;
                     break;
                 case EMPEZADA:
                     empezadasList.innerHTML += subjCard;
