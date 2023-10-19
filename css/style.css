@@ -1,0 +1,154 @@
+*{
+    font-family: sans-serif, cursive;
+    font-weight: 50px;
+    
+    }
+
+
+.navbar-nav{
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+
+
+
+.welcome-header{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center;
+    background-image: url("images/HERO.png");
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+}
+
+.welcome-header .text{
+    padding-bottom: 5%;
+    font-size: 50px;
+}
+
+.main-container{
+    padding-bottom: auto;
+    background-color:#e7eaf2;
+    padding: 60px; /* Espaciado interno personalizado */
+}
+.main-container .text-organizer{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center;
+    font-size: 25px;
+}
+.main-container .text-organizer .text-main{
+    font-size: 30px;
+}
+.main-container .text-organizer .text-main2{
+    font-size: 20px;
+    line-height: 10px;
+}
+
+.main-container .cards{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.main-card{
+  background-color: #acb0b1; /* Color de fondo personalizado */
+  border: 1px solid #050505; /* Borde personalizado */
+  padding: 15px; /* Espaciado interno personalizado */
+  margin-right: 25px; /* Espaciado externo personalizado */
+  margin-left: 25px; /* Espaciado externo personalizado */
+  margin-bottom: 25px; /* Espaciado externo personalizado */
+  border-radius: px; /* Esquinas redondeadas personalizadas */
+  box-shadow: 2px 2px 5px #0c2763; /* Sombra personalizada */
+  color: #0a0a0a; /* Color de texto personalizado */
+  text-align: center; /* Alineación del texto personalizada */
+}
+
+.card-color1 {background-color: #009688;}
+.card-color2 {background-color: #FFB74D;}
+.card-color3 {background-color: #B39DDB;}
+.card-color4 {background-color: #C8E6C9;}
+.card-color5 {background-color: #FFF9C4;}
+.card-color6 {background-color: #90CAF9;}
+
+
+.btn-close-custom{
+    color: red;
+    margin-left:90%;
+    text-decoration:none;
+    font-size: large;
+}
+
+.modal-content-delete {
+    background-color: #e7eaf2; /* Color de fondo del modal eliminar*/
+}
+
+.modal-header {
+    color: #080808; /* Color del texto del encabezado del modal eliminar */
+}
+
+.modal-title {
+    font-size: 30px; /* Tamaño del texto del título del modal eliminar */
+} 
+
+.modal-body {
+    padding: 20px; /* Relleno del cuerpo del modal eliminar */
+}
+
+.btn-close {
+    color: rgb(10, 10, 10);
+}
+
+/*MODAL ADD SEMESTRE*/
+
+.modal-header-semestre-form{
+    display: inline;
+
+}
+
+.modal-title-add-semestre{
+    text-align:justify;
+    margin-top: 70px;
+    font-size: 30px;
+    font-weight: bold;    
+}
+.modal-subtitle-add-semestre{
+    text-align:justify;
+    font-size: 20px;
+    font-weight: bold; 
+
+}
+
+.modal-content-add{
+    background-color: #B39DDB;
+}
+    
+.btn-primary{
+    background-color: crimson;
+    width: 100%;
+}
+
+#staticAddSemestreLabel{
+    margin-top: 25px;
+}
+
+
+.form-select-color{
+    margin-top:15px;
+    margin-bottom: 10px ;
+}
+
+
+
+.footer{
+    text-align: center;
+    background-color: #ededea;
+}
+
+
+   
