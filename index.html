@@ -63,8 +63,7 @@
           derecha del todo,
           pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</p>
         <!-- Botones para abrir los modales de formulario -->
-        <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterForm">+
-          SEMESTRE</button>
+        <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterModal">+ SEMESTRE</button>
         <button id="newSubjectBtn" class="custom-btn d-none" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
       </div>
     </div>
@@ -106,7 +105,7 @@
   </footer>
 
   <!-- Modals -->
-  <div id="newSemesterForm" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div id="newSemesterModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen-sm-down">
       <div class="modal-content">
 
@@ -114,7 +113,7 @@
           <h4 class="modal-title">Nuevo semestre</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <form class="was-validated" onsubmit="return handleNewSemForm(event, this)">
+        <form class="was-validated" id="newSemForm" onsubmit="return handleNewSemForm(event, this)">
           <div class="modal-body">
             <!-- un formulario con campos requeridos y otros opcionales. Los campos pueden ser: -->
             <!-- nombre del semestre,
@@ -191,7 +190,7 @@
     </div>
   </div>
 
-  <div id="newSubjectForm" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div id="newSubjectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen-sm-down">
       <div class="modal-content">
 
@@ -199,7 +198,7 @@
           <h4 class="modal-title">Nueva asignatura</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <form class="was-validated" onsubmit="return handleNewSubjectForm(event, this)">
+        <form class="was-validated" id="newSubjectForm" onsubmit="return handleNewSubjectForm(event, this)">
           <input type="hidden" name="subjId" id="subjId">
           <input type="hidden" name="subjSemId" id="subjSemId">
           <input type="hidden" name="subjStatus" id="subjStatus">

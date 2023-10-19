@@ -10,8 +10,10 @@ const newSubjectBtn = document.getElementById('newSubjectBtn');
 const semestersList = document.getElementById('semestersList');
 const semesterPage = document.getElementById('semesterPage');
 const semSlogan = document.getElementById('semSlogan');
-const newSemesterForm = new bootstrap.Modal('#newSemesterForm');
-const newSubjectForm = new bootstrap.Modal('#newSubjectForm');
+const newSemesterModal = new bootstrap.Modal('#newSemesterModal');
+// const newSemForm = document.getElementById('newSemForm');
+const newSubjectModal = new bootstrap.Modal('#newSubjectModal');
+// const newSubjectForm = document.getElementById('newSubjectForm');
 const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
 const pendientesZone = document.getElementById('pendientes-zone');
 const pendientesList = document.getElementById('pendientesList');
@@ -154,6 +156,30 @@ async function updateSubjectStatus(id, status) {
 }
 
 /**
+ * Actualiza un semestre o asignatura en la base de datos.
+ */
+async function updateSubject(subj) {
+    // Cast to numbers
+    subj.id = Number(subj.id);
+    subj.status = Number(subj.status);
+
+    const subjOld = await getSubjectById(subj.id);
+    if (subjOld) {
+        subjOld.name = subj.name;
+        subjOld.descrip = subj.descrip;
+        subjOld.difficulty = subj.difficulty;
+        subjOld.grade = subj.grade;
+        subjOld.like = subj.like;
+        subjOld.status = subj.status;
+        subjOld.semId = subj.semId;
+
+    } else {
+        throw new Error(`Subject ${subj.id} not found`);
+    }
+}
+
+
+/**
  * Borra un semestre o asignatura de la base de datos.
  */
 async function deleteData(info) {
@@ -210,7 +236,8 @@ async function deleteSemConfirmed() {
 /**
  * TODO
  */
-function editSubject(id) {
+function editSubject(ev, id) {
+    ev.preventDefault();
     console.log("TODO: Edit subject " + id);
 }
 /**
@@ -256,6 +283,7 @@ function createSemCard(sem) {
     </div>
     <div class="card-footer">
         <button class="btn btn-primary" onclick="openSem(${sem.id})">Ver</button>
+        <button class="btn btn-secondary" onclick="editSem(${sem.id})">Editar</button>
     </div>
 </div>`;
 }
@@ -273,8 +301,8 @@ function createSubjectCard(subj) {
         <button class="btn-close" onclick="deleteSubject(${subj.id})"></button>
         <h5 class="card-title">${subj.name}</button></h5>
         <p class="card-text">${descrip}</p>
-        <button class="custom-btn-card-dg" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="editSubject(${subj.id})">EDITAR</button>
-        <!-- button class="btn btn-primary" onclick="editSubject(${subj.id})"><i class="bi bi-pencil-square"></i></button -->
+        <button class="custom-btn-card-dg" onclick="editSubject(event,${subj.id})">EDITAR</button>
+        <!-- button class="btn btn-primary" onclick="editSubject(event,${subj.id})"><i class="bi bi-pencil-square"></i></button -->
         <!-- button class="btn btn-danger"><i class="bi bi-x-circle"></i></button -->
         <!-- button class="custom-btn-card2-dg" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="agregarTarjeta()">BORRAR</button -->
     </div>
@@ -297,7 +325,7 @@ function createSubjectCard(subj) {
  * Recibe los datos del formulario de creación de un nuevo semestre.
  * Da formato adecuado a los datos.
  * Esconde el formulario.
- * TODO: limpia el formulario
+ * Limpia el formulario
  * Crea el semestre en la base de datos.
  * Actualiza la lista de semestres.
  * @param {Event} ev - Evento de envío del formulario
@@ -320,8 +348,8 @@ async function handleNewSemForm(ev, form) {
         subjects: [],
     };
 
-    newSemesterForm.hide();
-    // TODO: limpiar formulario
+    newSemesterModal.hide();
+    form.reset();
     await createData({ sem });
     refreshSemesters(data.semesters);
 
@@ -357,7 +385,7 @@ async function handleNewSubjectForm(ev, form) {
         status:form.subjStatus.value,
     };
 
-    newSubjectForm.hide();
+    newSubjectModal.hide();
     // TODO: limpiar formulario
     await createData({ subj });
     // TODO: refresh subjects
@@ -585,7 +613,7 @@ function openSubjectForm(status, id=null) {
     hiddenSubj.semId.value = semesterPage.dataset.id;
     if (id) { hiddenSubj.id.value = id; }
     else { hiddenSubj.id.value = ''; }
-    newSubjectForm.show();
+    newSubjectModal.show();
 }
 
 
