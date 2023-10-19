@@ -237,7 +237,7 @@ async function deleteSemConfirmed() {
  * TODO
  */
 function editSubject(ev, id) {
-    ev.preventDefault();
+    // ev.preventDefault();
     console.log("TODO: Edit subject " + id);
 }
 /**
@@ -360,7 +360,7 @@ async function handleNewSemForm(ev, form) {
  * Recibe los datos del formulario de creación de una nueva asignatura.
  * Da formato adecuado a los datos.
  * Esconde el formulario.
- * TODO: limpia el formulario
+ * Limpia el formulario
  * Crea la asignatura en la base de datos.
  * Actualiza la lista de asignaturas.
  * @param {Event} ev - Evento de envío del formulario
@@ -386,7 +386,7 @@ async function handleNewSubjectForm(ev, form) {
     };
 
     newSubjectModal.hide();
-    // TODO: limpiar formulario
+    form.reset();
     await createData({ subj });
     // TODO: refresh subjects
     return false;
