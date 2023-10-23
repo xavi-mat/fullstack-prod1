@@ -2,7 +2,9 @@
 
 
 ## TODO
+
 * mejorar la estética de las tarjetas de los semestres
+    * Fusionar rama de jau2
 * Añadir asignaturas
     * Cada una con el estado del botón en el que se ha hecho clic
         * Para ello, manipular el modal de creación de asignaturas al abrirlo con un data-status
@@ -13,6 +15,7 @@
 * modal de edición de asignatura
 * modal de edición de semestre
 * Datos de semestre en la página de semestre
+* Color picker por Katiane
 
 ## DONE
 * Estilizar zona de asignaturas pendientes

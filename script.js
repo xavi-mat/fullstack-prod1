@@ -105,7 +105,7 @@ async function createData(info) {
     // Create subject
     if (info.subj) {
         console.log('Creating subject', info.subj);
-        // TODO: Create subject
+
         const sem = await getSemesterById(info.subj.semId);
 
         // Obtener el id nuevo de la asignatura, usando reduce para obtener el
@@ -118,7 +118,7 @@ async function createData(info) {
             }, 0) + 1;
         info.subj.id = id;
 
-        sem.subjects.push(info.subj);
+        sem.subjects.push(info.subj);  // TODO: REVISAR SI SE ESTÁ CREANDO
     }
 }
 
