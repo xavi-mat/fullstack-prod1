@@ -10,10 +10,11 @@ const newSubjectBtn = document.getElementById('newSubjectBtn');
 const semestersList = document.getElementById('semestersList');
 const semesterPage = document.getElementById('semesterPage');
 const semSlogan = document.getElementById('semSlogan');
-const newSemesterModal = new bootstrap.Modal('#newSemesterModal');
+const semesterModal = new bootstrap.Modal('#semesterModal');
 // const newSemForm = document.getElementById('newSemForm');
-const newSubjectModal = new bootstrap.Modal('#newSubjectModal');
-// const newSubjectForm = document.getElementById('newSubjectForm');
+const subjectModal = new bootstrap.Modal('#subjectModal');
+const subjModalTitle = document.getElementById('subjModalTitle');
+const subjectForm = document.getElementById('subjectForm');
 const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
 const pendientesZone = document.getElementById('pendientes-zone');
 const pendientesList = document.getElementById('pendientesList');
@@ -24,10 +25,15 @@ const aprobadasList = document.getElementById('aprobadasList');
 const suspendidasColumn = document.getElementById('suspendidas-column');
 const suspendidasList = document.getElementById('suspendidasList');
 // Hidden fields in Subject Form
-const hiddenSubj = {
+const subjFormFields = {
     id: document.getElementById('subjId'),
     status: document.getElementById('subjStatus'),
     semId: document.getElementById('subjSemId'),
+    name: document.getElementById('subjectName'),
+    descrip: document.getElementById('subjectDescrip'),
+    difficulty: document.getElementById('subjectDifficulty'),
+    grade: document.getElementById('subjectGrade'),
+    like: document.getElementById('subjectLike'),
 };
 const zones = [pendientesZone, empezadasColumn, aprobadasColumn,
     suspendidasColumn];
@@ -98,8 +104,21 @@ async function createData(info) {
 
     // Create subject
     if (info.subj) {
+        console.log('Creating subject', info.subj);
         // TODO: Create subject
-        console.log('TODO: Creating subject', info.subj);
+        const sem = await getSemesterById(info.subj.semId);
+
+        // Obtener el id nuevo de la asignatura, usando reduce para obtener el
+        // id más alto de todas las asignaturas de todos los semestres
+        const id = data.semesters
+            .map(sem => sem.subjects)
+            .flat()
+            .reduce((max, subj) => {
+                return subj.id > max ? subj.id : max;
+            }, 0) + 1;
+        info.subj.id = id;
+
+        sem.subjects.push(info.subj);
     }
 }
 
@@ -149,6 +168,7 @@ async function updateSubjectStatus(id, status) {
     const subj = await getSubjectById(id);
     if (subj) {
         subj.status = status;
+        console.log(subj);
 
     } else {
         throw new Error(`Subject ${id} not found`);
@@ -164,6 +184,7 @@ async function updateSubject(subj) {
     subj.status = Number(subj.status);
 
     const subjOld = await getSubjectById(subj.id);
+
     if (subjOld) {
         subjOld.name = subj.name;
         subjOld.descrip = subj.descrip;
@@ -301,8 +322,8 @@ function createSubjectCard(subj) {
         <button class="btn-close" onclick="deleteSubject(${subj.id})"></button>
         <h5 class="card-title">${subj.name}</button></h5>
         <p class="card-text">${descrip}</p>
-        <button class="custom-btn-card-dg" onclick="editSubject(event,${subj.id})">EDITAR</button>
-        <!-- button class="btn btn-primary" onclick="editSubject(event,${subj.id})"><i class="bi bi-pencil-square"></i></button -->
+        <button class="custom-btn-card-dg" onclick="openSubjectForm(${subj.id})">EDITAR</button>
+        <!-- button class="btn btn-primary" onclick="openSubjectForm(${subj.id})"><i class="bi bi-pencil-square"></i></button -->
         <!-- button class="btn btn-danger"><i class="bi bi-x-circle"></i></button -->
         <!-- button class="custom-btn-card2-dg" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="agregarTarjeta()">BORRAR</button -->
     </div>
@@ -348,7 +369,7 @@ async function handleNewSemForm(ev, form) {
         subjects: [],
     };
 
-    newSemesterModal.hide();
+    semesterModal.hide();
     form.reset();
     await createData({ sem });
     refreshSemesters(data.semesters);
@@ -368,27 +389,36 @@ async function handleNewSemForm(ev, form) {
  * @returns {Boolean} - Devuelve false para evitar que el formulario refresque
  * la página.
  */
-async function handleNewSubjectForm(ev, form) {
+async function handleSubjectForm(ev, form) {
     ev.preventDefault();
 
-    // TODO: Si en el formulario hay una id (en el campo escondido subjId), es
+    // Si en el formulario hay una id (en el campo escondido subjId), es
     // porque se está editando una asignatura. En ese caso, hay que actualizar
     // la asignatura en la BD en vez de crear una nueva.
 
     const subj = {
+        id: form.subjId.value,
+        semId: form.subjSemId.value,
         name: form.subjectName.value,
         descrip: form.subjectDescrip.value,
         difficulty: form.subjectDifficulty.value,
         grade: form.subjectGrade.value,
-        like: form.subjectLike.value,
-        semId: form.subjSemId.value,
+        like: form.subjectLike.checked,
         status:form.subjStatus.value,
     };
 
-    newSubjectModal.hide();
+    subjectModal.hide();
     form.reset();
-    await createData({ subj });
-    // TODO: refresh subjects
+
+    if (subj.id) {
+        // Si hay id, se está editando una asignatura
+        await updateSubject(subj);
+    } else {
+        // Si no hay id, se está creando una asignatura nueva
+        await createData({ subj });
+    }
+
+    refreshSubjects(await getSemesterById(subj.semId));
     return false;
 }
 
@@ -444,13 +474,11 @@ async function dragdrop(ev) {
     const card = document.getElementById(subjId);
     const subjectId = card.dataset.id;
     const status = column.dataset.status;
-    console.log({ subjectId, status });
+
     await updateSubjectStatus(subjectId, status);
     // La tarjeta se añade a un div que está dentro de la columna, por eso se
     // usa querySelector para seleccionar ese div y luego appendChild para
     // añadir la tarjeta a ese div.
-    const elDivEse = column.querySelector("div");
-    console.log({elDivEse});
     column.querySelector("div").appendChild(card);
 }
 
@@ -560,6 +588,11 @@ async function openSem(id) {
 }
 
 
+function editSem(id) {
+    console.log("TODO");
+}
+
+
 /**
  * Vacía las listas de asignaturas (se trata de los `div` que contienen las
  * cards de las asignaturas), y las vuelve a crear todas de nuevo, cada una en
@@ -607,13 +640,35 @@ function refreshSubjects(sem) {
  * @param {Number} id - Id de la asignatura que se quiere editar
  * (solo si se está editando).
  */
-function openSubjectForm(status, id=null) {
+async function openSubjectForm(id=null) {
     // Set hidden values in form
-    hiddenSubj.status.value = status;
-    hiddenSubj.semId.value = semesterPage.dataset.id;
-    if (id) { hiddenSubj.id.value = id; }
-    else { hiddenSubj.id.value = ''; }
-    newSubjectModal.show();
+    subjFormFields.semId.value = semesterPage.dataset.id;
+
+    if (id) {
+        // Si existe un id, estamos editando una asignatura existente
+        subjModalTitle.innerHTML = 'Editar asignatura';
+        const subj = await getSubjectById(id);
+        // El status no se modifica desde el formulario
+        subjFormFields.status.value = subj.status;
+        subjFormFields.id.value = id;
+        subjFormFields.name.value = subj.name;
+        subjFormFields.descrip.value = subj.descrip;
+        subjFormFields.difficulty.value = subj.difficulty;
+        subjFormFields.grade.value = subj.grade;
+        subjFormFields.like.checked = subj.like;
+
+    } else {
+        // Si no existe un id, estamos creando una asignatura nueva
+        subjModalTitle.innerHTML = 'Nueva asignatura';
+        subjFormFields.status.value = PENDIENTE;  // Status por defecto
+        subjFormFields.id.value = '';
+        subjFormFields.name.value = '';
+        subjFormFields.descrip.value = '';
+        subjFormFields.difficulty.value = '5'; // Valor por defecto
+        subjFormFields.grade.value = '';
+        subjFormFields.like.checked = false;
+    }
+    subjectModal.show();
 }
 
 

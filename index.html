@@ -63,7 +63,7 @@
           derecha del todo,
           pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</p>
         <!-- Botones para abrir los modales de formulario -->
-        <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#newSemesterModal">+ SEMESTRE</button>
+        <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#semesterModal">+ SEMESTRE</button>
         <button id="newSubjectBtn" class="custom-btn d-none" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
       </div>
     </div>
@@ -105,7 +105,7 @@
   </footer>
 
   <!-- Modals -->
-  <div id="newSemesterModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div id="semesterModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen-sm-down">
       <div class="modal-content">
 
@@ -113,22 +113,9 @@
           <h4 class="modal-title">Nuevo semestre</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <form class="was-validated" id="newSemForm" onsubmit="return handleNewSemForm(event, this)">
+        <form class="was-validated" id="newSemForm"
+          onsubmit="return handleNewSemForm(event, this)">
           <div class="modal-body">
-            <!-- un formulario con campos requeridos y otros opcionales. Los campos pueden ser: -->
-            <!-- nombre del semestre,
-              año,
-              fecha inicio,
-              fecha final, -->
-            <!-- descripción, -->
-            <!-- color que se verá en la interfaz 1 para diferenciar entre las cards,
-              y otros dos campos a elección de vosotros. -->
-            Se tienen que mostrar todos los mensajes de error para validar el
-            formulario y al darle a añadir se tiene que cerrar el modal y que aparezca ese nuevo
-            semestre en
-            la
-            lista de
-            la interfaz 1.
             <div class="input-group mb-3">
               <div class="form-floating">
                 <input type="text" class="form-control" id="semName" placeholder="Nombre" name="semName" required>
@@ -183,22 +170,22 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Añadir</button>
+            <button type="submit" class="btn btn-primary">Aceptar</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <div id="newSubjectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div id="subjectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen-sm-down">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Nueva asignatura</h4>
+          <h4 id="subjModalTitle" class="modal-title">Nueva asignatura</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <form class="was-validated" id="newSubjectForm" onsubmit="return handleNewSubjectForm(event, this)">
+        <form class="was-validated" id="subjectForm" onsubmit="return handleSubjectForm(event, this)">
           <input type="hidden" name="subjId" id="subjId">
           <input type="hidden" name="subjSemId" id="subjSemId">
           <input type="hidden" name="subjStatus" id="subjStatus">
@@ -235,7 +222,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Añadir</button>
+            <button type="submit" class="btn btn-primary">Aceptar</button>
           </div>
         </form>
       </div>
