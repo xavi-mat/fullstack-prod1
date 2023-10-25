@@ -57,13 +57,20 @@
   <div class="body-hero hero-section mb-5">
     <div class="jumbotron jumbotron-fluid">
       <div class="container-asignaturas">
-        <h1 id="pageTitle" class="display-4 text-center">_Semestres</h1>
-        <p class="lead text-center">Organiza tu <span id="pageTopic" style="font-weight: bold;">curso</span></p>
-        <p id="semSlogan" class="lead text-center d-none semSlogan">Lo mejor sería que tus asignaturas no llegaran a la
-          derecha del todo, pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</p>
-        <!-- Botones para abrir los modales de formulario -->
-        <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#semesterModal">+ SEMESTRE</button>
-        <button id="newSubjectBtn" class="custom-btn d-none" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
+        <div id="dashboardHeader">
+          <h1 class="display-4 text-center">_Semestres</h1>
+          <p class="lead text-center">Organiza tu <span style="font-weight: bold;">curso</span></p>
+          <!-- Botones para abrir los modales de formulario -->
+          <button id="newSemBtn" class="custom-btn" data-bs-toggle="modal" data-bs-target="#semesterModal">+ SEMESTRE</button>
+        </div>
+        <div id="semHeader" class="d-none">
+          <h1 class="display-4 text-center">_Asignaturas</h1>
+          <p class="lead text-center">Organiza tu <span style="font-weight: bold;">semestre</span></p>
+          <span id="semSlogan" class="text-center">
+            Lo mejor sería que tus asignaturas no llegaran a la derecha del todo, pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</span><br>
+          <!-- Botones para abrir los modales de formulario -->
+          <button id="newSubjectBtn" class="custom-btn" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
+        </div>
       </div>
     </div>
   </div>
@@ -179,7 +186,6 @@
   <div id="subjectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen-sm-down">
       <div class="modal-content">
-
         <div class="modal-header">
           <h4 id="subjModalTitle" class="modal-title">Nueva asignatura</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

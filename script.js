@@ -3,13 +3,10 @@
 // GLOBALS
 // Elements
 // Obtener los elementos del html para que el JS los pueda gestionar
-const pageTitle = document.getElementById('pageTitle');
-const pageTopic = document.getElementById('pageTopic');
-const newSemBtn = document.getElementById('newSemBtn');
-const newSubjectBtn = document.getElementById('newSubjectBtn');
+const dashboardHeader = document.getElementById('dashboardHeader');
+const semHeader = document.getElementById('semHeader');
 const semestersList = document.getElementById('semestersList');
 const semesterPage = document.getElementById('semesterPage');
-const semSlogan = document.getElementById('semSlogan');
 const semesterModal = new bootstrap.Modal('#semesterModal');
 // const newSemForm = document.getElementById('newSemForm');
 const subjectModal = new bootstrap.Modal('#subjectModal');
@@ -118,7 +115,7 @@ async function createData(info) {
             }, 0) + 1;
         info.subj.id = id;
 
-        sem.subjects.push(info.subj);  // TODO: REVISAR SI SE ESTÁ CREANDO
+        sem.subjects.push(info.subj); 
     }
 }
 
@@ -191,8 +188,8 @@ async function updateSubject(subj) {
         subjOld.difficulty = subj.difficulty;
         subjOld.grade = subj.grade;
         subjOld.like = subj.like;
-        subjOld.status = subj.status;
-        subjOld.semId = subj.semId;
+        subjOld.status = Number(subj.status);
+        subjOld.semId = Number(subj.semId);
 
     } else {
         throw new Error(`Subject ${subj.id} not found`);
@@ -322,10 +319,7 @@ function createSubjectCard(subj) {
         <button class="btn-close" onclick="deleteSubject(${subj.id})"></button>
         <h5 class="card-title">${subj.name}</button></h5>
         <p class="card-text">${descrip}</p>
-        <button class="custom-btn-card-dg" onclick="openSubjectForm(${subj.id})">EDITAR</button>
-        <!-- button class="btn btn-primary" onclick="openSubjectForm(${subj.id})"><i class="bi bi-pencil-square"></i></button -->
-        <!-- button class="btn btn-danger"><i class="bi bi-x-circle"></i></button -->
-        <!-- button class="custom-btn-card2-dg" data-bs-toggle="modal" data-bs-target="#crearSemestreModal" onclick="agregarTarjeta()">BORRAR</button -->
+        <button class="custom-btn-card-dg" onclick="openSubjectForm(null,${subj.id})">EDITAR</button>
     </div>
 </div>`;
 }
@@ -397,14 +391,14 @@ async function handleSubjectForm(ev, form) {
     // la asignatura en la BD en vez de crear una nueva.
 
     const subj = {
-        id: form.subjId.value,
-        semId: form.subjSemId.value,
+        id: Number(form.subjId.value),
+        semId: Number(form.subjSemId.value),
         name: form.subjectName.value,
         descrip: form.subjectDescrip.value,
         difficulty: form.subjectDifficulty.value,
         grade: form.subjectGrade.value,
         like: form.subjectLike.checked,
-        status:form.subjStatus.value,
+        status: Number(form.subjStatus.value),
     };
 
     subjectModal.hide();
@@ -550,10 +544,8 @@ function applyListeners() {
  * También cambia el título y una palabra del eslogan.
  */
 function goSemsList() {
-    pageTitle.innerHTML = '_Semestres';
-    pageTopic.innerHTML = 'curso';
-    hideMe(semesterPage, semSlogan, newSubjectBtn);
-    showMe(semestersList, newSemBtn);
+    hideMe(semHeader, semesterPage);
+    showMe(dashboardHeader, semestersList);
 }
 
 /**
@@ -578,13 +570,11 @@ async function openSem(id) {
 
     console.log('Opening sem', id);
 
-    pageTitle.innerHTML = '_Asignaturas';
-    pageTopic.innerHTML = 'semestre';
-    hideMe(semestersList, newSemBtn);
+    hideMe(dashboardHeader, semestersList);
     const sem = await getSemesterById(id);
     refreshSubjects(sem);
     semesterPage.dataset.id = id;
-    showMe(semesterPage, semSlogan, newSubjectBtn);
+    showMe(semHeader, semesterPage);
 }
 
 
@@ -636,11 +626,11 @@ function refreshSubjects(sem) {
 /**
  * Muestra el formulario de las asignaturas.
  * @param {Number} status - Estado de la asignatura que se quiere crear
- * o editar
+ * (solo si se está creando).
  * @param {Number} id - Id de la asignatura que se quiere editar
  * (solo si se está editando).
  */
-async function openSubjectForm(id=null) {
+async function openSubjectForm(status, id = null) {
     // Set hidden values in form
     subjFormFields.semId.value = semesterPage.dataset.id;
 
@@ -648,7 +638,7 @@ async function openSubjectForm(id=null) {
         // Si existe un id, estamos editando una asignatura existente
         subjModalTitle.innerHTML = 'Editar asignatura';
         const subj = await getSubjectById(id);
-        // El status no se modifica desde el formulario
+
         subjFormFields.status.value = subj.status;
         subjFormFields.id.value = id;
         subjFormFields.name.value = subj.name;
@@ -660,7 +650,7 @@ async function openSubjectForm(id=null) {
     } else {
         // Si no existe un id, estamos creando una asignatura nueva
         subjModalTitle.innerHTML = 'Nueva asignatura';
-        subjFormFields.status.value = PENDIENTE;  // Status por defecto
+        subjFormFields.status.value = status;
         subjFormFields.id.value = '';
         subjFormFields.name.value = '';
         subjFormFields.descrip.value = '';
