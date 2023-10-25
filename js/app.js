@@ -1,51 +1,5 @@
 "use strict";
 ////////////////////////////////////////////////////////////////////////////////
-// GLOBALS
-// Elements
-// Obtener los elementos del html para que el JS los pueda gestionar
-const dashboardHeader = document.getElementById('dashboardHeader');
-const semHeader = document.getElementById('semHeader');
-const semestersList = document.getElementById('semestersList');
-const semesterPage = document.getElementById('semesterPage');
-const semesterModal = new bootstrap.Modal('#semesterModal');
-const semModalTitle = document.getElementById('semModalTitle');
-const subjectModal = new bootstrap.Modal('#subjectModal');
-const subjModalTitle = document.getElementById('subjModalTitle');
-const subjectForm = document.getElementById('subjectForm');
-const confirmDelete = new bootstrap.Modal('#confirmDelete');
-const pendientesZone = document.getElementById('pendientes-zone');
-const pendientesList = document.getElementById('pendientesList');
-const empezadasColumn = document.getElementById('empezadas-column');
-const empezadasList = document.getElementById('empezadasList');
-const aprobadasColumn = document.getElementById('aprobadas-column');
-const aprobadasList = document.getElementById('aprobadasList');
-const suspendidasColumn = document.getElementById('suspendidas-column');
-const suspendidasList = document.getElementById('suspendidasList');
-// Fields in forms
-const semFormFields = {
-    id: document.getElementById('semId'),
-    name: document.getElementById('semName'),
-    year: document.getElementById('semYear'),
-    start: document.getElementById('semStart'),
-    end: document.getElementById('semEnd'),
-    descrip: document.getElementById('semDescrip'),
-    color: document.getElementById('semColor'),
-    type: document.getElementById('semType'),
-    tutorized: document.getElementById('semTutor'),
-};
-const subjFormFields = {
-    id: document.getElementById('subjId'),
-    status: document.getElementById('subjStatus'),
-    semId: document.getElementById('subjSemId'),
-    name: document.getElementById('subjectName'),
-    descrip: document.getElementById('subjectDescrip'),
-    difficulty: document.getElementById('subjectDifficulty'),
-    grade: document.getElementById('subjectGrade'),
-    like: document.getElementById('subjectLike'),
-};
-const zones = [pendientesZone, empezadasColumn, aprobadasColumn,
-    suspendidasColumn];
-
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
 // Constantes para evitar números mágicos y para que sean más fáciles de entender los códigos de estado de las asignaturas
@@ -58,7 +12,6 @@ const SUSPENDIDA = 3;
 // Variables
 // Variables globales que serán necesarias en muchas funciones
 let data;
-
 
 
 
@@ -77,6 +30,7 @@ function showMe(...elems) { elems.forEach(e => e.classList.remove('d-none')); }
  * Para ello, añade la clase 'd-none' en cada elemento.
  */
 function hideMe(...elems) { elems.forEach(e => e.classList.add('d-none')); }
+
 
 
 
@@ -752,6 +706,53 @@ async function openSubjectForm(status, id = null) {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+// GLOBALS
+// Elements
+// Obtener los elementos del html para que el JS los pueda gestionar
+const dashboardHeader = document.getElementById('dashboardHeader');
+const semHeader = document.getElementById('semHeader');
+const semestersList = document.getElementById('semestersList');
+const semesterPage = document.getElementById('semesterPage');
+const semesterModal = new bootstrap.Modal('#semesterModal');
+const semModalTitle = document.getElementById('semModalTitle');
+const subjectModal = new bootstrap.Modal('#subjectModal');
+const subjModalTitle = document.getElementById('subjModalTitle');
+const subjectForm = document.getElementById('subjectForm');
+const confirmDelete = new bootstrap.Modal('#confirmDelete');
+const pendientesZone = document.getElementById('pendientes-zone');
+const pendientesList = document.getElementById('pendientesList');
+const empezadasColumn = document.getElementById('empezadas-column');
+const empezadasList = document.getElementById('empezadasList');
+const aprobadasColumn = document.getElementById('aprobadas-column');
+const aprobadasList = document.getElementById('aprobadasList');
+const suspendidasColumn = document.getElementById('suspendidas-column');
+const suspendidasList = document.getElementById('suspendidasList');
+// Fields in forms
+const semFormFields = {
+    id: document.getElementById('semId'),
+    name: document.getElementById('semName'),
+    year: document.getElementById('semYear'),
+    start: document.getElementById('semStart'),
+    end: document.getElementById('semEnd'),
+    descrip: document.getElementById('semDescrip'),
+    color: document.getElementById('semColor'),
+    type: document.getElementById('semType'),
+    tutorized: document.getElementById('semTutor'),
+};
+const subjFormFields = {
+    id: document.getElementById('subjId'),
+    status: document.getElementById('subjStatus'),
+    semId: document.getElementById('subjSemId'),
+    name: document.getElementById('subjectName'),
+    descrip: document.getElementById('subjectDescrip'),
+    difficulty: document.getElementById('subjectDifficulty'),
+    grade: document.getElementById('subjectGrade'),
+    like: document.getElementById('subjectLike'),
+};
+const zones = [pendientesZone, empezadasColumn, aprobadasColumn,
+    suspendidasColumn];
+
+
 /**
  * Inicializa la página.
  * - Aplica los listeners de las zonas Drag&Drop
