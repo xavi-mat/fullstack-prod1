@@ -2,11 +2,8 @@
 
 ## BACKLOG
 * Datos de semestre en la página de semestre
-* `refreshSubjects()` no debería necesitar parámetros, en `semesterPage.dataset.id` está la id del semestre que hay que refescar.
 
 ## TODO
-* Color picker por Katiane
-* el color del semestre debería colorear el fondo de la tarjeta de semestre
 
 ## DONE
 * Estilizar zona de asignaturas pendientes
@@ -27,3 +24,10 @@
     * Usar el mismo modal de confirmación que los semestres, con alguna modificación (o quizá no)
 * Menú principal sticky
 * modal de edición de semestre
+* Color picker por Katiane
+    * No acaba de funcionar, porque cada navegador gestiona el `select` de forma distinta.
+* el color del semestre debería colorear el fondo de la tarjeta de semestre
+    * Coloreados la cabecera y el footer de la tarjeta
+    * El título e nla cabecera tiene un outline blanco para que sea legible incluso con fondos oscuros.
+* `refreshSubjects()` no debería necesitar parámetros, en `semesterPage.dataset.id` está la id del semestre que hay que refescar.
+    * No hace falta, està bien así, para evitar llamadas dobles a getSemesterById

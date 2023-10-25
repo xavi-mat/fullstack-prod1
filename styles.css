@@ -389,10 +389,3 @@ h1, h2, h3, h4, h5, h6 {
 .textshadow {
     text-shadow: 1px 1px #FFFFFF, -1px 1px #FFFFFF, 1px -1px #FFFFFF, -1px -1px #FFFFFF;
 }
-
-.card-color1 {background-color: #009688;}
-.card-color2 {background-color: #FFB74D;}
-.card-color3 {background-color: #B39DDB;}
-.card-color4 {background-color: #C8E6C9;}
-.card-color5 {background-color: #FFF9C4;}
-.card-color6 {background-color: #90CAF9;}

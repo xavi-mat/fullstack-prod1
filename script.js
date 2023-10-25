@@ -22,17 +22,7 @@ const aprobadasColumn = document.getElementById('aprobadas-column');
 const aprobadasList = document.getElementById('aprobadasList');
 const suspendidasColumn = document.getElementById('suspendidas-column');
 const suspendidasList = document.getElementById('suspendidasList');
-// Hidden fields in Subject Form
-const subjFormFields = {
-    id: document.getElementById('subjId'),
-    status: document.getElementById('subjStatus'),
-    semId: document.getElementById('subjSemId'),
-    name: document.getElementById('subjectName'),
-    descrip: document.getElementById('subjectDescrip'),
-    difficulty: document.getElementById('subjectDifficulty'),
-    grade: document.getElementById('subjectGrade'),
-    like: document.getElementById('subjectLike'),
-};
+// Fields in forms
 const semFormFields = {
     id: document.getElementById('semId'),
     name: document.getElementById('semName'),
@@ -43,6 +33,16 @@ const semFormFields = {
     color: document.getElementById('semColor'),
     type: document.getElementById('semType'),
     tutorized: document.getElementById('semTutor'),
+};
+const subjFormFields = {
+    id: document.getElementById('subjId'),
+    status: document.getElementById('subjStatus'),
+    semId: document.getElementById('subjSemId'),
+    name: document.getElementById('subjectName'),
+    descrip: document.getElementById('subjectDescrip'),
+    difficulty: document.getElementById('subjectDifficulty'),
+    grade: document.getElementById('subjectGrade'),
+    like: document.getElementById('subjectLike'),
 };
 const zones = [pendientesZone, empezadasColumn, aprobadasColumn,
     suspendidasColumn];
@@ -202,7 +202,6 @@ async function updateSubjectStatus(id, status) {
     const subj = await getSubjectById(id);
     if (subj) {
         subj.status = status;
-        console.log(subj);
 
     } else {
         throw new Error(`Subject ${id} not found`);
@@ -470,7 +469,8 @@ async function handleSubjectForm(ev, form) {
         await createData({ subj });
     }
 
-    refreshSubjects(await getSemesterById(subj.semId));
+    const sem = await getSemesterById(subj.semId);
+    refreshSubjects(sem);
     return false;
 }
 
@@ -630,8 +630,8 @@ async function openSem(id) {
 
     hideMe(dashboardHeader, semestersList);
     const sem = await getSemesterById(id);
-    refreshSubjects(sem);
     semesterPage.dataset.id = id;
+    refreshSubjects(sem);
     showMe(semHeader, semesterPage);
 }
 
@@ -662,7 +662,7 @@ async function openSemForm(id=null) {
         semFormFields.start.value = '';
         semFormFields.end.value = '';
         semFormFields.descrip.value = '';
-        semFormFields.color.value = '#ffffff';
+        semFormFields.color.value = '#c398b7';
         semFormFields.type.value = '1';
         semFormFields.tutorized.checked = true;
     }
