@@ -14,7 +14,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-  </script>
+    </script>
   <!-- Iconos de bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="./styles.css">
@@ -66,7 +66,8 @@
           <h1 class="display-4 text-center">_Asignaturas</h1>
           <p class="lead text-center">Organiza tu <span style="font-weight: bold;">semestre</span></p>
           <span id="semSlogan" class="text-center">
-            Lo mejor sería que tus asignaturas no llegaran a la derecha del todo, pero si alguna cae allí... vuelve a la izquierda y no te desanimes!.</span><br>
+            Lo mejor sería que tus asignaturas no llegaran a la derecha del todo, pero si alguna cae allí... vuelve a la
+            izquierda y no te desanimes!.</span><br>
           <button id="newSubjectBtn" class="custom-btn" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
         </div>
       </div>
@@ -126,8 +127,7 @@
           <h4 id="semModalTitle" class="modal-title">Nuevo semestre</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <form class="was-validated" id="newSemForm"
-          onsubmit="return handleSemForm(event, this)">
+        <form class="was-validated" id="newSemForm" onsubmit="return handleSemForm(event, this)">
           <input type="hidden" id="semId" name="semId">
           <div class="modal-body">
             <div class="input-group mb-3">
@@ -163,8 +163,17 @@
 
             <div class="input-group mb-3">
               <div class="form-floating">
-                <input type="color" class="form-control" id="semColor" placeholder="Color" name="semColor">
-                <label for="semColor">Color</label>
+                <!-- <input type="color" class="form-control" id="semColor" placeholder="Color" name="semColor"> -->
+                <select name="semColor" id="semColor" class="form-select">
+                  <option selected>Selecciona color de la tarjeta</option>
+                  <option value="1" class="card-color1"></option>
+                  <option value="2" class="card-color2"></option>
+                  <option value="3" class="card-color3"></option>
+                  <option value="4" class="card-color4"></option>
+                  <option value="5" class="card-color5"></option>
+                  <option value="6" class="card-color6"></option>
+                </select>
+                <!-- <label for="semColor">Color</label> -->
               </div>
               <div class="form-floating">
                 <select class="form-select" id="semType" name="semType" required>
