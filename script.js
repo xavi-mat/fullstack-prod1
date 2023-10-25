@@ -8,7 +8,6 @@ const semHeader = document.getElementById('semHeader');
 const semestersList = document.getElementById('semestersList');
 const semesterPage = document.getElementById('semesterPage');
 const semesterModal = new bootstrap.Modal('#semesterModal');
-// const newSemForm = document.getElementById('newSemForm');
 const semModalTitle = document.getElementById('semModalTitle');
 const subjectModal = new bootstrap.Modal('#subjectModal');
 const subjModalTitle = document.getElementById('subjModalTitle');
