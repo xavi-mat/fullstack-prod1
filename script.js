@@ -9,10 +9,11 @@ const semestersList = document.getElementById('semestersList');
 const semesterPage = document.getElementById('semesterPage');
 const semesterModal = new bootstrap.Modal('#semesterModal');
 // const newSemForm = document.getElementById('newSemForm');
+const semModalTitle = document.getElementById('semModalTitle');
 const subjectModal = new bootstrap.Modal('#subjectModal');
 const subjModalTitle = document.getElementById('subjModalTitle');
 const subjectForm = document.getElementById('subjectForm');
-const confirmDeleteSem = new bootstrap.Modal('#confirmDeleteSem');
+const confirmDelete = new bootstrap.Modal('#confirmDelete');
 const pendientesZone = document.getElementById('pendientes-zone');
 const pendientesList = document.getElementById('pendientesList');
 const empezadasColumn = document.getElementById('empezadas-column');
@@ -31,6 +32,17 @@ const subjFormFields = {
     difficulty: document.getElementById('subjectDifficulty'),
     grade: document.getElementById('subjectGrade'),
     like: document.getElementById('subjectLike'),
+};
+const semFormFields = {
+    id: document.getElementById('semId'),
+    name: document.getElementById('semName'),
+    year: document.getElementById('semYear'),
+    start: document.getElementById('semStart'),
+    end: document.getElementById('semEnd'),
+    descrip: document.getElementById('semDescrip'),
+    color: document.getElementById('semColor'),
+    type: document.getElementById('semType'),
+    tutorized: document.getElementById('semTutor'),
 };
 const zones = [pendientesZone, empezadasColumn, aprobadasColumn,
     suspendidasColumn];
@@ -115,7 +127,7 @@ async function createData(info) {
             }, 0) + 1;
         info.subj.id = id;
 
-        sem.subjects.push(info.subj); 
+        sem.subjects.push(info.subj);
     }
 }
 
@@ -136,6 +148,31 @@ async function getData() {
 async function getSemesterById(id) {
     id = Number(id);
     return data.semesters.find(sem => sem.id === id);
+}
+
+/**
+ * Actualiza un semestre
+ */
+async function updateSemester(sem) {
+    // Cast to numbers
+    sem.id = Number(sem.id);
+    sem.year = Number(sem.year);
+
+    const semOld = await getSemesterById(sem.id);
+
+    if (semOld) {
+        semOld.name = sem.name;
+        semOld.year = sem.year;
+        semOld.start = sem.start;
+        semOld.end = sem.end;
+        semOld.descrip = sem.descrip;
+        semOld.color = sem.color;
+        semOld.type = sem.type;
+        semOld.tutorized = sem.tutorized;
+
+    } else {
+        throw new Error(`Semester ${sem.id} not found`);
+    }
 }
 
 /**
@@ -173,7 +210,7 @@ async function updateSubjectStatus(id, status) {
 }
 
 /**
- * Actualiza un semestre o asignatura en la base de datos.
+ * Actualiza una asignatura en la base de datos.
  */
 async function updateSubject(subj) {
     // Cast to numbers
@@ -226,46 +263,57 @@ async function deleteData(info) {
 ////////////////////////////////////////////////////////////////////////////////
 // LOGIC
 /**
- * Muestra el modal de confirmación para borrar un elemento.
+ * Muestra el modal de confirmación para borrar un semestre.
  */
 async function deleteSem(id) {
 
     const sem = await getSemesterById(id);
 
     if (sem) {
-        const semName = document.getElementById("semNameDelete");
-        semName.innerHTML = sem.name;
-        semName.dataset.id = id;
-        confirmDeleteSem.show();
+        const thingName = document.getElementById("toDeleteName");
+        thingName.innerHTML = `el semestre ${sem.name}`;
+        thingName.dataset.what = "semester";  // Borrar un semestre
+        thingName.dataset.id = id;
+        confirmDelete.show();
+    }
+}
+
+/**
+ * Muestra el modal de confirmación para borrar una asignatura.
+ * Borra una asignatura. TODO: que sea a la vuelta del modal de confirmación.
+ */
+async function deleteSubject(id) {
+
+    const subj = await getSubjectById(id);
+
+    if (subj) {
+        const thingName = document.getElementById("toDeleteName");
+        thingName.innerHTML = `la asignatura ${subj.name}`;
+        thingName.dataset.what = "subject";  // Borrar una asignatura
+        thingName.dataset.id = id;
+        confirmDelete.show();
     }
 }
 
 /**
  * Borra el elemento seleccionado. Esta función viene del modal de confirmación.
  */
-async function deleteSemConfirmed() {
-    const semName = document.getElementById("semNameDelete");
-    const id = semName.dataset.id;
-    confirmDeleteSem.hide();
-    await deleteData({ semId: id });
-    refreshSemesters(data.semesters);
-}
+async function deleteConfirmed() {
+    const thingName = document.getElementById("toDeleteName");
+    const what = thingName.dataset.what;  // La 'cosa' a borrar ("semester" o "subject")
+    const id = thingName.dataset.id;
+    confirmDelete.hide();
 
-/**
- * TODO
- */
-function editSubject(ev, id) {
-    // ev.preventDefault();
-    console.log("TODO: Edit subject " + id);
-}
-/**
- * Borra una asignatura. TODO: que sea a la vuelta del modal de confirmación.
- */
-async function deleteSubject(id) {
-    await deleteData({ subjId: id });
-    const semId = semesterPage.dataset.id;
-    const sem = await getSemesterById(semId);
-    refreshSubjects(sem);
+    if (what === "semester") {
+        await deleteData({ semId: id });
+        refreshSemesters(data.semesters);
+
+    } else if (what === "subject") {
+        await deleteData({ subjId: id });
+        const semId = semesterPage.dataset.id;
+        const sem = await getSemesterById(semId);
+        refreshSubjects(sem);
+    }
 }
 
 
@@ -301,7 +349,7 @@ function createSemCard(sem) {
     </div>
     <div class="card-footer">
         <button class="btn btn-primary" onclick="openSem(${sem.id})">Ver</button>
-        <button class="btn btn-secondary" onclick="editSem(${sem.id})">Editar</button>
+        <button class="btn btn-secondary" onclick="openSemForm(${sem.id})">Editar</button>
     </div>
 </div>`;
 }
@@ -312,7 +360,7 @@ function createSemCard(sem) {
 function createSubjectCard(subj) {
     let descrip = subj.descrip;
     // Trim description to 30 chars if needed
-    if (descrip.length > 30) { descrip = subj.descript.slice(0, 27) + '...'; }
+    if (descrip.length > 30) { descrip = descrip.slice(0, 27) + '...'; }
 
     return `<div class="card parrafo" draggable="true" id="subject${subj.id}" data-id="${subj.id}">
     <div class="card-body">
@@ -348,12 +396,17 @@ function createSubjectCard(subj) {
  * @returns {Boolean} - Devuelve false para evitar que el formulario refresque
  * la página.
  */
-async function handleNewSemForm(ev, form) {
+async function handleSemForm(ev, form) {
     ev.preventDefault();
 
+    // Si en el formulario hay una id (en el campo escondido semId), es
+    // porque se está editando un semestre. En ese caso, hay que actualizar
+    // el semestre en la BD en vez de crear uno nuevo.
+
     const sem = {
+        id: Number(form.semId.value),
         name: form.semName.value,
-        year: form.semYear.value,
+        year: Number(form.semYear.value),
         start: form.semStart.value,
         end: form.semEnd.value,
         descrip: form.semDescrip.value,
@@ -365,9 +418,14 @@ async function handleNewSemForm(ev, form) {
 
     semesterModal.hide();
     form.reset();
-    await createData({ sem });
-    refreshSemesters(data.semesters);
 
+    if (sem.id) {
+        await updateSemester(sem);
+    } else {
+        await createData({ sem });
+    }
+
+    refreshSemesters(data.semesters);
     return false;
 }
 
@@ -578,8 +636,37 @@ async function openSem(id) {
 }
 
 
-function editSem(id) {
-    console.log("TODO");
+async function openSemForm(id=null) {
+    if (id) {
+        // Si existe un id, estamos editando un semestre existente
+        semModalTitle.innerHTML = 'Editar semestre';
+        const sem = await getSemesterById(id);
+
+        semFormFields.id.value = id;
+        semFormFields.name.value = sem.name;
+        semFormFields.year.value = sem.year;
+        semFormFields.start.value = sem.start;
+        semFormFields.end.value = sem.end;
+        semFormFields.descrip.value = sem.descrip;
+        semFormFields.color.value = sem.color;
+        semFormFields.type.value = sem.type;
+        semFormFields.tutorized.checked = sem.tutorized;
+
+    } else {
+        // Si no existe un id, estamos creando un semestre nuevo
+        // Ponemos valores vacíos y por defecto
+        semModalTitle.innerHTML = 'Nuevo semestre';
+        semFormFields.id.value = '';
+        semFormFields.name.value = '';
+        semFormFields.year.value = '';
+        semFormFields.start.value = '';
+        semFormFields.end.value = '';
+        semFormFields.descrip.value = '';
+        semFormFields.color.value = '#ffffff';
+        semFormFields.type.value = '1';
+        semFormFields.tutorized.checked = true;
+    }
+    semesterModal.show();
 }
 
 
