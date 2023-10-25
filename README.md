@@ -1,11 +1,12 @@
 # fullstack-prod1
 
+## BACKLOG
+* Datos de semestre en la página de semestre
+* `refreshSubjects()` no debería necesitar parámetros, en `semesterPage.dataset.id` está la id del semestre que hay que refescar.
 
 ## TODO
-* Datos de semestre en la página de semestre
 * Color picker por Katiane
 * el color del semestre debería colorear el fondo de la tarjeta de semestre
-* `refreshSubjects()` no debería necesitar parámetros, en `semesterPage.dataset.id` está la id del semestre que hay que refescar.
 
 ## DONE
 * Estilizar zona de asignaturas pendientes
