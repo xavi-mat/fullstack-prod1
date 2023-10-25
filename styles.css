@@ -89,6 +89,13 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #F14161;
 }
 
+.custom-btn-3 {
+    border-radius: 3px;
+    text-decoration: none; /* Quitar subrayado del texto */
+    padding: 10px 20px; /* Ajustar el relleno para agregar margen a los lados */
+    margin: 10px; /* Ajustar el margen según sea necesario */
+}
+
 /* Backgrounds para las targetas */
 .custom-card {
     text-align: center;
@@ -377,6 +384,10 @@ h1, h2, h3, h4, h5, h6 {
 .dragover {
     /*  Make it glow with light */
     box-shadow: 0 0 10px 0 #ff0000;
+}
+
+.textshadow {
+    text-shadow: 1px 1px #FFFFFF, -1px 1px #FFFFFF, 1px -1px #FFFFFF, -1px -1px #FFFFFF;
 }
 
 .card-color1 {background-color: #009688;}

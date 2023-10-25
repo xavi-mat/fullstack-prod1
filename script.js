@@ -341,15 +341,15 @@ function createSemCard(sem) {
 
     return `<div id="semester${sem.id}" class="card mb-3 semester-card" data-id="${sem.id}">
     <button class="btn-close" onclick="deleteSem(${sem.id})"></button>
-    <h5 class="card-header">
+    <h5 class="card-header textshadow" style="background-color:${sem.color}">
     ${sem.name}
     </h5>
     <div class="card-body">
         <p class="card-text">${descrip}</p>
     </div>
-    <div class="card-footer">
-        <button class="btn btn-primary" onclick="openSem(${sem.id})">Ver</button>
-        <button class="btn btn-secondary" onclick="openSemForm(${sem.id})">Editar</button>
+    <div class="card-footer d-flex justify-content-around" style="background-color:${sem.color}">
+    <button class="btn btn-secondary custom-btn-3" onclick="openSemForm(${sem.id})">Editar</button>
+    <button class="btn btn-primary custom-btn-3" onclick="openSem(${sem.id})">Abrir</button>
     </div>
 </div>`;
 }
