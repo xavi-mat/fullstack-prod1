@@ -293,13 +293,13 @@ function createSemCard(sem) {
 
     return `<div id="semester${sem.id}" class="card mb-3 semester-card" data-id="${sem.id}">
     <button class="btn-close" onclick="deleteSem(${sem.id})"></button>
-    <h5 class="card-header textshadow" style="background-color:${sem.color}">
+    <h5 class="card-header textshadow ${sem.color}">
     ${sem.name}
     </h5>
     <div class="card-body">
         <p class="card-text">${descrip}</p>
     </div>
-    <div class="card-footer d-flex justify-content-around" style="background-color:${sem.color}">
+    <div class="card-footer d-flex justify-content-around ${sem.color}">
     <button class="btn btn-secondary custom-btn-3" onclick="openSemForm(${sem.id})">Editar</button>
     <button class="btn btn-primary custom-btn-3" onclick="openSem(${sem.id})">Abrir</button>
     </div>
@@ -615,11 +615,14 @@ async function openSemForm(id=null) {
         semFormFields.start.value = '';
         semFormFields.end.value = '';
         semFormFields.descrip.value = '';
-        semFormFields.color.value = '#c398b7';
+        semFormFields.color.value = '';
         semFormFields.type.value = '1';
         semFormFields.tutorized.checked = true;
     }
     semesterModal.show();
+    /* forzamos colores por clases al abrir el modal*/
+    var d = document.getElementById("semColor");
+    d.className = "form-select form-select-color form-control " + semFormFields.color.value;
 }
 
 
@@ -771,3 +774,15 @@ async function init() {
 // y constantes y también funciones.
 // Solo cuando se llega a este punto empieza a realizarse algo en la página.
 init();
+
+
+
+//////////////////////////////////////
+// Color modal select Change color in choose
+const selectElement = document.querySelector("#semColor");
+selectElement.addEventListener("change", (event) => {
+    var value = event.target.value;
+    var d = document.getElementById("semColor");
+    d.className = "form-select form-select-color form-control " + value;
+    d.blur();
+  });

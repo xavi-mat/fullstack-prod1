@@ -161,7 +161,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Estilo para los campos del formulario dentro del modal */
 .modal-body input,
-.modal-body select,
 .modal-body textarea {
     margin-bottom: 15px; /* Espaciado entre los campos del formulario */
     background-color: #fff;
@@ -389,3 +388,11 @@ h1, h2, h3, h4, h5, h6 {
 .textshadow {
     text-shadow: 1px 1px #FFFFFF, -1px 1px #FFFFFF, 1px -1px #FFFFFF, -1px -1px #FFFFFF;
 }
+
+/* Select colors */
+.card-color1 {background-color: #009688;}
+.card-color2 {background-color: #FFB74D;}
+.card-color3 {background-color: #B39DDB;}
+.card-color4 {background-color: #C8E6C9;}
+.card-color5 {background-color: #FFF9C4;}
+.card-color6 {background-color: #90CAF9;}
