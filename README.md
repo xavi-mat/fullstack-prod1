@@ -4,6 +4,9 @@
 * Datos de semestre en la página de semestre
 
 ## TODO
+Flecha de vuelta al dashboard
+Dividir el código de JS
+
 
 ## DONE
 * Estilizar zona de asignaturas pendientes
