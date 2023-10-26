@@ -96,6 +96,16 @@ h1, h2, h3, h4, h5, h6 {
     margin: 10px; /* Ajustar el margen según sea necesario */
 }
 
+.custom-btn-4 {
+    background-color: #ffba08;
+    color: #fff; /* Color del texto del botón */
+    border: none;
+    border-radius: 3px;
+    text-decoration: none; /* Quitar subrayado del texto */
+    padding: 10px 20px; /* Ajustar el relleno para agregar margen a los lados */
+    display: inline-block; /* Para que el margen lateral funcione correctamente */
+    margin: 10px; 
+}
 /* Backgrounds para las targetas */
 .custom-card {
     text-align: center;
