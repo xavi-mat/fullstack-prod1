@@ -24,33 +24,17 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <!-- Logo a la izquierda -->
     <a class="navbar-brand" href="#" onclick="goSemsList()">
-      <img src="./img/Logo-1.png" width="180" height="26" alt="">
+        <img src="./img/Logo-1.png" width="180" height="26" alt="">
     </a>
+</nav>
 
-    <!-- Botón de hamburguesa para dispositivos móviles -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <!-- Enlaces del menú centrados -->
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">INICIO</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">PERFIL</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">SUPPORT</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">CONTACTO</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+
+  <!-- Botón de hamburguesa para dispositivos móviles -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
 
   <!-- SubHero -->
   <div class="body-hero hero-section mb-5">
@@ -69,6 +53,8 @@
             vuelve a la
             izquierda y no te desanimes!.</span><br>
           <button id="newSubjectBtn" class="custom-btn" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
+          <div id="semHeader" class="d-none"></div>
+          <button id="newSubjectBtn" class="custom-btn-4" onclick="goSemsList()"> < VOLVER AL INICIO</button>
         </div>
       </div>
     </div>
@@ -124,7 +110,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 id="semModalTitle" class="modal-title">Nuevo semestre</h4>
+          <h4 id="semModalTitle" class="modal-title text-center">Nuevo semestre</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <form class="was-validated" id="newSemForm" onsubmit="return handleSemForm(event, this)">
@@ -191,7 +177,7 @@
   </div>
 
   <div id="subjectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-fullscreen-sm-down">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 id="subjModalTitle" class="modal-title">Nueva asignatura</h4>
@@ -243,7 +229,7 @@
 
   <!-- Modal de confirmación para el borrado de semestres o asignaturas -->
   <div class="modal" id="confirmDelete">
-    <div class="modal-dialog">
+    <div class="modal-dialog delete-modal">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
