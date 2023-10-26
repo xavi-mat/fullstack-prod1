@@ -1,0 +1,27 @@
+{
+    "name": "static",
+    "version": "1.0.0",
+    "description": "This is a static template with no bundling",
+    "main": "index.html",
+    "scripts": {
+      "start": "serve",
+      "build": "echo This is a static template, there is no bundler or bundling involved!"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/xavi-mat/fullstack-prod1/"
+    },
+    "keywords": [
+      "static",
+      "template",
+      "codesandbox"
+    ],
+    "author": "JackX",
+    "bugs": {
+      "url": "https://github.com/xavi-mat/fullstack-prod1/issues"
+    },
+    "homepage": "https://github.com/xavi-mat/fullstack-prod1#readme",
+    "devDependencies": {
+      "serve": "^11.2.0"
+    }
+  }
