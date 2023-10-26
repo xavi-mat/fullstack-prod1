@@ -124,7 +124,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 id="semModalTitle" class="modal-title">Nuevo semestre</h4>
+          <h4 id="semModalTitle" class="modal-title text-center">Nuevo semestre</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <form class="was-validated" id="newSemForm" onsubmit="return handleSemForm(event, this)">
@@ -191,7 +191,7 @@
   </div>
 
   <div id="subjectModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-fullscreen-sm-down">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 id="subjModalTitle" class="modal-title">Nueva asignatura</h4>
@@ -243,7 +243,7 @@
 
   <!-- Modal de confirmación para el borrado de semestres o asignaturas -->
   <div class="modal" id="confirmDelete">
-    <div class="modal-dialog">
+    <div class="modal-dialog delete-modal">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
