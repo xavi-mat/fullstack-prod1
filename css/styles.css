@@ -15,6 +15,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif; /* Aplica tipografia Poppins a los encabezados */
 }
 
+h3 {
+    font-weight: 200;
+}
+
 /* Menu navegacion */
 .nav-color {
     background-color: white;
@@ -106,6 +110,17 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block; /* Para que el margen lateral funcione correctamente */
     margin: 10px; 
 }
+
+.custom-btn-5 {
+    background-color: #464f69;
+    color: #fff; /* Color del texto del botón */
+    border: none;
+    border-radius: 3px;
+    text-decoration: none; /* Quitar subrayado del texto */
+    padding: 10px 20px; /* Ajustar el relleno para agregar margen a los lados */
+    display: inline-block; /* Para que el margen lateral funcione correctamente */
+    margin: 10px; 
+}
 /* Backgrounds para las targetas */
 .custom-card {
     text-align: center;
@@ -138,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 5px;
+    padding: 15px;
 }
 
 /* Estilo para el modal */
@@ -310,12 +325,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .custom-btn-card-dg {
     border-radius: 3px;
+    color:#FFFFFF;
     box-shadow: none;
     border: none;
     background-color: #ef3054;
     font-size: 14px;
-    padding: 4px;
-    width: 80%;
+    padding: 6px;
+    width: 50%;
 }
 
 .custom-btn-card-dg :hover {
@@ -357,10 +373,11 @@ h1, h2, h3, h4, h5, h6 {
     width: 30%;
 }
 .zone {
-    background-color: #a1a8ba;
-    margin: 24px;
+    background-color: #a0abcc;
+    margin: 22px;
     padding: 24px;
     min-height: 200px;
+    border-radius: 6px;
 }
 
 .draggable-container {
@@ -373,10 +390,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .card {
     margin: 20px;
-
+    border: none;
 }
+
+.card-text {
+    font-size: 14px;
+    font-weight: 300;
+    border: none;
+}
+
 .semester-card {
-    min-width: 350px;
+    min-width: 300px;
+}
+
+.card-header {
+    background-color: #000;
 }
 
 .parrafo {
@@ -437,4 +465,8 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0px;
     border: none;
     background-color: #a0abcc;
+}
+
+.semesterList {
+    background-color: #000;
 }
