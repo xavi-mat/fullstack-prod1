@@ -292,16 +292,20 @@ function createSemCard(sem) {
     if (descrip.length > 30) { descrip = descrip.slice(0, 27) + '...'; }
 
     return `<div id="semester${sem.id}" class="card mb-3 semester-card" data-id="${sem.id}">
-    <button class="btn-close" onclick="deleteSem(${sem.id})"></button>
+    <button class="btn-close btn-close2" onclick="deleteSem(${sem.id})"></button>
     <h5 class="card-header textshadow" style="background-color:${sem.color}">
     ${sem.name}
     </h5>
-    <div class="card-body">
+    <div class="container">
+    <div class="d-flex justify-content-center">
+    <div class="card mb-3 semester-card">
         <p class="card-text">${descrip}</p>
     </div>
+    </div>
+    </div>
     <div class="card-footer d-flex justify-content-around" style="background-color:${sem.color}">
-    <button class="btn btn-secondary custom-btn-3" onclick="openSemForm(${sem.id})">Editar</button>
-    <button class="btn btn-primary custom-btn-3" onclick="openSem(${sem.id})">Abrir</button>
+    <button class="custom-btn" onclick="openSemForm(${sem.id})">Editar</button>
+    <button class="custom-btn-5" onclick="openSem(${sem.id})">Abrir</button>
     </div>
 </div>`;
 }

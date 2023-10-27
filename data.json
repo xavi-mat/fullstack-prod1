@@ -7,7 +7,7 @@
             "start": "2013-08-26",
             "end": "2013-12-13",
             "descrip": "Fall 2013 semester",
-            "color": "#FFCCCC",
+            "color": "#fab482",
             "type": 1,
             "tutorized": true,
             "subjects": [
@@ -65,7 +65,7 @@
             "start": "2014-01-13",
             "end": "2014-05-02",
             "descrip": "Spring 2014 semester",
-            "color": "#CCFFCC",
+            "color": "#d8dc6a",
             "type": 1,
             "tutorized": true,
             "subjects": [
@@ -123,7 +123,7 @@
             "start": "2014-08-25",
             "end": "2014-12-12",
             "descrip": "Fall 2014 semester",
-            "color": "#CCCCFF",
+            "color": "#adc3b0",
             "type": 1,
             "tutorized": true,
             "subjects": [
