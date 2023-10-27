@@ -89,8 +89,8 @@ async function createData(info) {
  * @returns {Object} - Objeto con los datos de la base de datos
  */
 async function getData() {
-    // Fake data from data.json
-    const dataRaw = await fetch('data.json');
+    // Fake data from data/data.json
+    const dataRaw = await fetch('./data/data.json');
     const data = await dataRaw.json();
     return data;
 }

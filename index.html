@@ -24,31 +24,31 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <!-- Logo a la izquierda -->
     <a class="navbar-brand" href="#" onclick="goSemsList()">
-        <img src="./img/Logo-1.png" width="180" height="26" alt="">
+      <img src="./img/Logo-1.png" width="180" height="26" alt="">
     </a>
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">INICIO</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">PERFIL</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">SUPPORT</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">CONTACTO</a>
-      </li>
-    </ul>
-</nav>
 
-
-
-  <!-- Botón de hamburguesa para dispositivos móviles -->
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
+    <!-- Botón de hamburguesa para dispositivos móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">INICIO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PERFIL</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">SUPPORT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">CONTACTO</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
   <!-- SubHero -->
   <div class="body-hero hero-section mb-5">
@@ -68,7 +68,8 @@
             izquierda y no te desanimes!.</span><br>
           <button id="newSubjectBtn" class="custom-btn" onclick="openSubjectForm(0)">+ ASIGNATURA</button>
           <div id="semHeader" class="d-none"></div>
-          <button id="newSubjectBtn" class="custom-btn-4" onclick="goSemsList()"> < VOLVER AL INICIO</button>
+          <button id="newSubjectBtn" class="custom-btn-4" onclick="goSemsList()">
+            < VOLVER AL INICIO</button>
         </div>
       </div>
     </div>
@@ -217,7 +218,8 @@
             </div>
             <div class="input-group mb-3">
               <label for="subjectDifficulty">Dificultad</label>
-              <input id="subjectDifficulty" name="subjectDifficulty" type="range" min="1" max="10" value="5" class="w-100">
+              <input id="subjectDifficulty" name="subjectDifficulty" type="range" min="1" max="10" value="5"
+                class="w-100">
             </div>
             <div class="input-group mb-3">
               <div class="form-floating">
